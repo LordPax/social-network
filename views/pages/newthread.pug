@@ -1,0 +1,12 @@
+html(lang='fr')
+    include ../parts/head.pug
+    body
+        include ../parts/header.pug
+        section
+            div.large
+                form(method='post' action='')
+                    input.input_title(type='text' name='input_title' placeholder='titre')
+                    textarea.input_content(name='input_content')
+                    input(type='submit' name='sub')
+
+        include ../parts/footer.pug
