@@ -7,16 +7,18 @@ app.get('/thread/:id', (req, res) => {
     if (req.params.id != '') {
         const id = req.params.id
         db.searchThread(id, data => {
-            res.render('pages/thread', {
-                titre : 'Winveer - thread',
-                threadTitle : data.title,
-                content : data.content
+            db.searchRep(id, (rep) => {
+                res.render('pages/thread', {
+                    titre : 'Winveer - thread',
+                    threadTitle : data.title,
+                    content : data.content,
+                    reponse : rep
+                })
             })
         }, err => res.redirect('/'))
     }
-    else{
+    else
         res.redirect('/')
-    }
 })
 
 app.post('/newthread', (req, res) => {
@@ -27,6 +29,16 @@ app.post('/newthread', (req, res) => {
     }
     else
 	    res.redirect('/newthread')
+})
+
+app.post('/thread/:id', (req, res) => {
+    if (req.body.input_content != '' && req.params.id != '') {
+        const content = req.body.input_content, str_id = req.params.id
+        db.repThread(str_id, content, 0)
+        res.redirect('/thread/' + str_id)
+    }
+    else
+        res.redirect('/')
 })
 
 module.exports = app

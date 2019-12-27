@@ -10,6 +10,7 @@ html(lang='fr')
                         form.form(method='post' action='')
                             input.input.form_title(type='text' name='input_title' placeholder='titre du thread')
                             textarea.input.form_content(name='input_content' placeholder='contenu du thread')
-                            input.button.form_sub(type='submit' name='sub')
+                            div.form_right
+                                input.button.form_sub(type='submit' name='sub' value='poster')
 
         include ../parts/footer.pug

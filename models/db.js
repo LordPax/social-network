@@ -29,10 +29,23 @@ const addThread = (title, content, user) => {
     return str_id
 }
 
+const repThread = (id, content, user) => {
+    db.query('INSERT INTO reponse SET ?', {
+       content : escapeHtml(content),
+       id_post : escapeHtml(id),
+       id_user : user
+    }, (err, res, fields) => { if (err) throw err })
+}
+
 const searchThread = (id, res, err) => {
     search('SELECT * FROM thread WHERE str_id = ?', [id])
     .then(data => res(data[0]))
     .catch(err2 => err(err2))
+}
+
+const searchRep = (id, res) => {
+    search('SELECT * FROM reponse WHERE id_post = ?', [id])
+    .then(data => res(data))
 }
 
 const threadAcc = (limit, res) => {
@@ -50,5 +63,7 @@ module.exports = {
     searchThread,
     strRandVerif,
     query : db.query,
-    threadAcc
+    threadAcc,
+    repThread,
+    searchRep
 }

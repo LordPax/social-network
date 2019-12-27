@@ -8,5 +8,15 @@ html(lang='fr')
                     div.fen.post
                         div.fen_title #{locals.threadTitle}
                         div.fen_conctent.post_content #{locals.content}
+                        hr
+                        form.form(method='post' action='')
+                            textarea.input.form_content(name='input_content' placeholder='contenu du thread')
+                            div.form_right
+                                input.button.form_sub(type='submit' name='sub' value='répondre')
+                        hr
+                        div.fen_content
+                            each rep in locals.reponse
+                                div.fen_conctent.post_content #{rep.content}
+                                hr
 
         include ../parts/footer.pug

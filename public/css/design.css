@@ -72,7 +72,10 @@ header{
     resize: none;
 }
 .form_sub{
-    float : right;
+    /*display : inline;*/
+}
+.form_right{
+    text-align : right;
 }
 .post{
     background-color : #FFF;
@@ -84,15 +87,22 @@ header{
     margin-top : 10px;
     margin-bottom : 10px;
 }
+.link{
+    text-decoration : none;
+    color : #3498db;
+}
+.link:hover{
+    color : #2980b9;
+}
 @font-face {
     font-family : 'Source Sans Pro';
     font-style : normal;
     font-weight : 300;
-    src : local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(/assets/source_sans_pro_300.ttf) format('truetype');
+    src : local('Source Sans Pro Light'), local('SourceSansPro-Light'), url(/assets/font/source_sans_pro_300.ttf) format('truetype');
 }
 @font-face {
     font-family : 'Source Sans Pro';
     font-style : normal;
     font-weight : 400;
-    src : local('Source Sans Pro'), local('SourceSansPro-Regular'), url(/assets/source_sans_pro_400.ttf) format('truetype');
+    src : local('Source Sans Pro'), local('SourceSansPro-Regular'), url(/assets/font/source_sans_pro_400.ttf) format('truetype');
 }
