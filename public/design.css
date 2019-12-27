@@ -6,19 +6,83 @@ html, body{
     font-size : 19px;
     margin: 0;
     padding : 0;
+    line-height : 21px;
 }
 header{
     background-color : #000;
 }
 .large{
-    border : 1px solid black;
+    /*border : 1px solid black;*/
     width: 1200px;
-    margin : auto;
+    margin-left : auto;
+    margin-right : auto;
+}
+.large2{
+    margin-top : 20px;
+}
+.main{
+    width : 60%;
 }
 .logo{
-    height : 50px;
+    height : 45px;
     padding-top : 5px;
     padding-bottom : 5px;
+}
+.fen{
+
+}
+.fen_title{
+    font-weight : 400;
+    font-size : 25px;
+    /*text-transform : uppercase;*/
+}
+.fen_content{
+    padding-top : 10px;
+    padding-left : 10px;
+}
+.input, .button{
+    padding : 5px;
+    border-radius : 2px;
+    border : 1px solid #A7A7A7;
+    background-color : #FFF;
+
+    font-family : 'Source Sans Pro', sans-serif;
+    line-height : 21px;
+    font-weight : 300;
+    font-size : 19px;
+    color : #444;
+}
+.button{
+    font-weight : 400;
+    background-color : #3498db;
+    border : 1px solid #3498db;
+    color : #FFF;
+    transition-duration : 0.5s;
+}
+.form_title, .form_content{
+    display : block;
+    width : 100%;
+    margin-bottom : 10px;
+}
+.form_title{
+    
+}
+.form_content{
+    height : 200px;
+    resize: none;
+}
+.form_sub{
+    float : right;
+}
+.post{
+    background-color : #FFF;
+    padding : 10px;
+    border-radius : 5px;
+    margin-bottom : 15px;
+}
+.post_content{
+    margin-top : 10px;
+    margin-bottom : 10px;
 }
 @font-face {
     font-family : 'Source Sans Pro';

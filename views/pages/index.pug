@@ -3,6 +3,12 @@ html(lang='fr')
     body
         include ../parts/header.pug
         section
-            div.large test
+            div.large.large2
+                div.main
+                    each t in locals.thread
+                        div.fen.post
+                            div.fen_title #{t.title}
+                            div.fen_conctent.post_content #{t.content}
+                    
 
         include ../parts/footer.pug

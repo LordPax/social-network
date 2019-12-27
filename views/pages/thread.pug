@@ -3,6 +3,10 @@ html(lang='fr')
     body
         include ../parts/header.pug
         section
-            div.large #{locals.threadTitle}, #{locals.content}
+            div.large.large2
+                div.main
+                    div.fen.post
+                        div.fen_title #{locals.threadTitle}
+                        div.fen_conctent.post_content #{locals.content}
 
         include ../parts/footer.pug

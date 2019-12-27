@@ -3,10 +3,13 @@ html(lang='fr')
     body
         include ../parts/header.pug
         section
-            div.large
-                form(method='post' action='')
-                    input.input_title(type='text' name='input_title' placeholder='titre')
-                    textarea.input_content(name='input_content')
-                    input(type='submit' name='sub')
+            div.large.large2
+                div.fen
+                    div.fen_title Nouveau thread
+                    div.fen_content
+                        form.form(method='post' action='')
+                            input.input.form_title(type='text' name='input_title' placeholder='titre du thread')
+                            textarea.input.form_content(name='input_content' placeholder='contenu du thread')
+                            input.button.form_sub(type='submit' name='sub')
 
         include ../parts/footer.pug
