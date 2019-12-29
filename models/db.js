@@ -44,13 +44,14 @@ const searchThread = (id, res, err) => {
 }
 
 const searchRep = (id, res) => {
-    search('SELECT * FROM reponse WHERE id_post = ?', [id])
+    search('SELECT * FROM reponse WHERE id_post = ? ORDER BY id DESC', [id])
     .then(data => res(data))
 }
 
 const threadAcc = (limit, res) => {
-    search('SELECT * FROM thread LIMIT ?', [limit])
+    search('SELECT * FROM thread ORDER BY id DESC LIMIT ?', [limit])
     .then(data => res(data))
+    .catch(err => {throw err})
 }
 
 // const searchThread = async id => {

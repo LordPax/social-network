@@ -1,10 +1,17 @@
 const app = require('express').Router()
 const db = require('../models/db')
+const {refomuleDate} = require('../include/until')
 
-app.get('/', (req, res) => db.threadAcc(10, thread => {
+app.get('/', (req, res) => db.threadAcc(10, thread => { 
     res.render('pages/index', {
         titre : 'Winveer - accueil',
-        thread : thread
+        thread : thread.map(elem => { return {
+            str_id : elem.str_id,
+            title : elem.title,
+            content : elem.content,
+            user : elem.user,
+            date : refomuleDate(elem.date)
+        }})
     })
 }))
 

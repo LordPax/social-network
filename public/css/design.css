@@ -29,7 +29,10 @@ header{
     padding-bottom : 5px;
 }
 .fen{
-
+    background-color : #FFF;
+    padding : 10px;
+    border-radius : 5px;
+    margin-bottom : 15px;
 }
 .fen_title{
     font-weight : 400;
@@ -37,8 +40,26 @@ header{
     /*text-transform : uppercase;*/
 }
 .fen_content{
+    margin-bottom : 10px;
+    padding-top : 10px;
+    word-break : break-all;
+    /*padding-left : 10px;*/
+}
+.fen_name{
+    /*font-weight : 400;*/
+}
+.fen_rep{
+
+}
+.fen_rep_content{
+    margin-bottom : 10px;
     padding-top : 10px;
     padding-left : 10px;
+}
+.fen_info{
+}
+.info_right{
+    float : right;
 }
 .input, .button{
     padding : 5px;
@@ -76,16 +97,6 @@ header{
 }
 .form_right{
     text-align : right;
-}
-.post{
-    background-color : #FFF;
-    padding : 10px;
-    border-radius : 5px;
-    margin-bottom : 15px;
-}
-.post_content{
-    margin-top : 10px;
-    margin-bottom : 10px;
 }
 .link{
     text-decoration : none;

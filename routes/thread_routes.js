@@ -1,5 +1,6 @@
 const app = require('express').Router()
 const db = require('../models/db')
+const {refomuleDate} = require('../include/until')
 
 app.get('/newthread', (req, res) => res.render('pages/newthread', {titre: 'Winveer - nouveau thread'}))
 
@@ -7,12 +8,17 @@ app.get('/thread/:id', (req, res) => {
     if (req.params.id != '') {
         const id = req.params.id
         db.searchThread(id, data => {
-            db.searchRep(id, (rep) => {
+            db.searchRep(id, rep => {
                 res.render('pages/thread', {
                     titre : 'Winveer - thread',
                     threadTitle : data.title,
                     content : data.content,
-                    reponse : rep
+                    reponse : rep.map(elem => { return {
+                        content : elem.content,
+                        user : elem.user,
+                        date : refomuleDate(elem.date)
+                    }}),
+                    date : refomuleDate(data.date)
                 })
             })
         }, err => res.redirect('/'))

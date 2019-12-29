@@ -5,18 +5,24 @@ html(lang='fr')
         section
             div.large.large2
                 div.main
-                    div.fen.post
+                    div.fen
                         div.fen_title #{locals.threadTitle}
-                        div.fen_conctent.post_content #{locals.content}
-                        hr
+                        div.fen_content #{locals.content}
+                        div.fen_info
+                            a.link(href='/') name
+                            div.info_right #{locals.date}
+                    div.fen
                         form.form(method='post' action='')
-                            textarea.input.form_content(name='input_content' placeholder='contenu du thread')
+                            textarea.input.form_content(name='input_content' placeholder='contenu de la réponse')
                             div.form_right
                                 input.button.form_sub(type='submit' name='sub' value='répondre')
-                        hr
-                        div.fen_content
-                            each rep in locals.reponse
-                                div.fen_conctent.post_content #{rep.content}
-                                hr
+                        
+                        each rep in locals.reponse
+                            div.fen_rep
+                                div.fen_name 
+                                    a.link(href='/') name
+                                    div.info_right #{rep.date}
+                                div.fen_rep_content #{rep.content}
+                            
 
         include ../parts/footer.pug

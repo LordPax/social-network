@@ -6,10 +6,13 @@ html(lang='fr')
             div.large.large2
                 div.main
                     each t in locals.thread
-                        div.fen.post
+                        div.fen
                             div.fen_title 
                                 a.link(href='/thread/' + t.str_id) #{t.title}
-                            div.fen_conctent.post_content #{t.content}
+                            div.fen_content #{t.content}
+                            div.fen_info
+                                a.link(href='/') name
+                                div.info_right #{t.date}
                     
 
         include ../parts/footer.pug
