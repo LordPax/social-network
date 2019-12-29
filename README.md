@@ -11,6 +11,12 @@ plus tard
 * Nodejs et npm installer et à jour
 * mysql installer
 
+### Intallation
+```bash
+git clone https://github.com/LordPax/winveer.git; cd winveer
+npm install
+```
+
 ### Créer data.json
 Ce fichier servira pour toutes les informations lier à la base de donnée par exemple
 ```json
@@ -27,9 +33,7 @@ Ce fichier servira pour toutes les informations lier à la base de donnée par e
 ### Creer la base de donnée
 Creer la base de donnee Winveer grâce au fichier sql ce trouvant a `bdd/winveer.sql` 
 
-### Intallation et démarage
+### Lancer
 ```bash
-git clone https://github.com/LordPax/winveer.git; cd winveer
-npm install
 npm start
 ```
