@@ -1,6 +1,8 @@
 const app = require('express').Router()
 const db = require('../models/db')
 const {refomuleDate} = require('../include/until')
+const showdown = require('showdown')
+const convert = new showdown.Converter()
 
 app.get('/newthread', (req, res) => res.render('pages/newthread', {titre: 'Winveer - nouveau thread'}))
 
@@ -12,9 +14,9 @@ app.get('/thread/:id', (req, res) => {
                 res.render('pages/thread', {
                     titre : 'Winveer - thread',
                     threadTitle : data.title,
-                    content : data.content,
+                    content : convert.makeHtml(data.content),
                     reponse : rep.map(elem => { return {
-                        content : elem.content,
+                        content : convert.makeHtml(elem.content),
                         user : elem.user,
                         date : refomuleDate(elem.date)
                     }}),

@@ -11,6 +11,31 @@ html, body{
 header{
     background-color : #000;
 }
+h1, h2, h3, h4, h5, h6{
+    font-weight : 400;
+}
+h1, h2{
+    border-bottom : 1px solid #EFEFEF;
+    padding-bottom : 5px;
+}
+h1{
+    font-size : 30px;
+}
+h2{
+    font-size : 25px;
+}
+h3, h4, h5, h6{
+    font-size : 20px;
+}
+code{
+    font-family : 'Source Sans Pro', sans-serif;
+    font-weight : 300;
+    font-size : 19px;
+    background-color : #f6f8fa;
+    display : block;
+    padding : 5px;
+    border-radius : 5px;
+}
 .large{
     /*border : 1px solid black;*/
     width: 1200px;
@@ -98,11 +123,11 @@ header{
 .form_right{
     text-align : right;
 }
-.link{
+a, .link{
     text-decoration : none;
     color : #3498db;
 }
-.link:hover{
+a, .link:hover{
     color : #2980b9;
 }
 @font-face {

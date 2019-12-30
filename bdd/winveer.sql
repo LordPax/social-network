@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  Dim 29 déc. 2019 à 02:49
+-- Généré le :  lun. 30 déc. 2019 à 00:05
 -- Version du serveur :  10.3.16-MariaDB
 -- Version de PHP :  7.3.6
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `reponse` (
   `id` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `id_post` varchar(255) NOT NULL,
   `id_user` int(11) NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp()
@@ -45,8 +45,8 @@ CREATE TABLE `reponse` (
 CREATE TABLE `thread` (
   `id` int(11) NOT NULL,
   `str_id` varchar(255) NOT NULL,
-  `title` text NOT NULL,
-  `content` text NOT NULL,
+  `title` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `user` int(11) NOT NULL DEFAULT 0,
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

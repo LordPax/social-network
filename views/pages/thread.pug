@@ -7,7 +7,7 @@ html(lang='fr')
                 div.main
                     div.fen
                         div.fen_title #{locals.threadTitle}
-                        div.fen_content #{locals.content}
+                        div.fen_content!=locals.content
                         div.fen_info
                             a.link(href='/') name
                             div.info_right #{locals.date}
@@ -22,7 +22,7 @@ html(lang='fr')
                                 div.fen_name 
                                     a.link(href='/') name
                                     div.info_right #{rep.date}
-                                div.fen_rep_content #{rep.content}
+                                div.fen_rep_content!=rep.content
                             
 
         include ../parts/footer.pug
