@@ -36,6 +36,9 @@ code{
     padding : 5px;
     border-radius : 5px;
 }
+img{
+    width : 100%
+}
 .large{
     /*border : 1px solid black;*/
     width: 1200px;
@@ -52,6 +55,7 @@ code{
     height : 45px;
     padding-top : 5px;
     padding-bottom : 5px;
+    width : initial;
 }
 .fen{
     background-color : #FFF;
