@@ -127,6 +127,12 @@ img{
 .form_right{
     text-align : right;
 }
+.p404{
+    height : 400px;
+    width : initial;
+    margin : auto;
+    display : block;
+}
 a, .link{
     text-decoration : none;
     color : #3498db;
