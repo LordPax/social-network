@@ -1,0 +1,21 @@
+html(lang='fr')
+    include ../parts/head.pug
+    body
+        include ../parts/header.pug
+        section
+            div.large.large2
+                div.main_centre
+                    div
+                        div.fen_title Inscription
+                        div.fen_content
+                            form.form(method='post' action='')
+                            input.input_text(type='text' name='username' placeholder='pseudo')
+                            input.input_text(type='email' name='email' placeholder='email')
+                            input.input_text(type='password' name='password' placeholder='mot de passe')
+                            input.input_text(type='password' name='password2' placeholder='re mot de passe')
+                            div.form_right
+                                input.button.log_btn(type='submit' name='sub' value='S\'inscrire')
+                        
+                    
+
+        include ../parts/footer.pug

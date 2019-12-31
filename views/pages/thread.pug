@@ -13,9 +13,9 @@ html(lang='fr')
                             div.info_right #{locals.date}
                     div.fen
                         form.form(method='post' action='')
-                            textarea.input.form_content(name='input_content' placeholder='contenu de la réponse')
+                            textarea.input_area(name='input_content' placeholder='contenu de la réponse')
                             div.form_right
-                                input.button.form_sub(type='submit' name='sub' value='répondre')
+                                input.button(type='submit' name='sub' value='Répondre')
                         
                         each rep in locals.reponse
                             div.fen_rep

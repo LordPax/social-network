@@ -2,7 +2,7 @@
 ## Description
 plus tard 
 
-## Images
+<!-- ## Images
 ### Acceuil
 ![accueil](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/accueil.png)
 
@@ -14,7 +14,7 @@ plus tard
 ![readme](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/thread_readme.png)
 
 ### Les réponses
-![reponse](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/reponse.png)
+![reponse](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/reponse.png) -->
 
 ## Installation
 ### Prérequis

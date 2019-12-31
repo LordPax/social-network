@@ -8,6 +8,7 @@ const domain = 'http://localhost:' + port + '/'
 
 const mainRoutes = require('./routes/main_routes')
 const threadRoutes = require('./routes/thread_routes')
+const loginRoutes = require('./routes/login_routes')
 
 app.set('view engine', 'pug')
 
@@ -20,6 +21,7 @@ app.use(session({
 app.use('/assets', express.static('public'))
 app.use(express.urlencoded({extended : true}))
 app.use(threadRoutes)
+app.use(loginRoutes)
 app.use(mainRoutes)
 
 app.listen(port, () => console.log('Ecoute le port', port, '...'))

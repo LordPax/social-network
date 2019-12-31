@@ -11,6 +11,7 @@ html, body{
 header{
     background-color : #000;
 }
+/*============= affichage markdown =============*/
 h1, h2, h3, h4, h5, h6{
     font-weight : 400;
 }
@@ -39,17 +40,23 @@ code{
 img{
     width : 100%
 }
+/*==============================================*/
 .large{
     /*border : 1px solid black;*/
     width: 1200px;
     margin-left : auto;
     margin-right : auto;
+
 }
 .large2{
     margin-top : 20px;
 }
 .main{
     width : 60%;
+}
+.main_centre{
+    width : 400px;
+    margin : auto;
 }
 .logo{
     height : 45px;
@@ -90,7 +97,7 @@ img{
 .info_right{
     float : right;
 }
-.input, .button{
+.button, .buttonInv, .input_text, .input_area{
     padding : 5px;
     border-radius : 2px;
     border : 1px solid #A7A7A7;
@@ -102,30 +109,51 @@ img{
     font-size : 19px;
     color : #444;
 }
+.input_text, .input_area{
+    display : block;
+    width : 100%;
+    margin-bottom : 10px;
+}
+.input_text{
+    
+}
+.input_area{
+    height : 200px;
+    resize: none;
+}
+.input_sub{
+    /*display : inline;*/
+}
+.form_right{
+    text-align : right;
+}
 .button{
     font-weight : 400;
     background-color : #3498db;
     border : 1px solid #3498db;
     color : #FFF;
-    transition-duration : 0.5s;
+    /*transition-duration : 0.5s;*/
 }
-.form_title, .form_content{
-    display : block;
+.buttonInv{
+    font-weight : 400;
+    background-color : #FFF;
+    border : 1px solid #FFF;
+    color : #3498db;
+}
+/*.buttonInv:hover{
+    background-color : #3498db;
+    border : 1px solid #3498db;
+    color : #FFF;
+    transition-duration : 0.3s;
+}*/
+.log_btn{
     width : 100%;
-    margin-bottom : 10px;
 }
-.form_title{
-    
+.info_head{
+    margin-top : 10px;
 }
-.form_content{
-    height : 200px;
-    resize: none;
-}
-.form_sub{
-    /*display : inline;*/
-}
-.form_right{
-    text-align : right;
+.head_btn{
+    margin-left : 10px;
 }
 .p404{
     height : 400px;
@@ -139,6 +167,27 @@ a, .link{
 }
 a, .link:hover{
     color : #2980b9;
+}
+@media(max-width : 1250px){
+    .large{
+        width : 1000px;
+    }
+}
+@media(max-width : 1050px){
+    .large{
+        width : 800px;
+    }
+    .main{
+        width : 100%;
+    }
+}
+@media(max-width : 850px){
+    .large{
+        width : 95%;
+    }
+    .main{
+        width : 100%;
+    }
 }
 @font-face {
     font-family : 'Source Sans Pro';

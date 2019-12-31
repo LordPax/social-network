@@ -1,10 +1,10 @@
 const app = require('express').Router()
-const db = require('../models/db')
+const thModel = require('../models/thread_models')
 const {refomuleDate} = require('../include/until')
 const showdown = require('showdown')
 const convert = new showdown.Converter()
 
-app.get('/', (req, res) => db.threadAcc(10, thread => { 
+app.get('/', (req, res) => thModel.threadAcc(10, thread => { 
     res.render('pages/index', {
         titre : 'Winveer - accueil',
         thread : thread.map(elem => { return {
