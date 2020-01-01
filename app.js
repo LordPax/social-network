@@ -1,8 +1,14 @@
 const express = require('express')
 const session = require('express-session')
 const app = express()
-const {port, secret} = require('./include/data.js')
+const bodyParser = require('body-parser')
+// const redis = require('redis')
+// const RedisStore = require('connect-redis')(session)
+// const client = redis.createClient()
+const {port, secret, sess_name, max_age} = require('./include/data.js')
+const mw = require('./include/middleware')
 // const rep = require('./socket/socket')
+// client.on('error', console.error)
 
 const domain = 'http://localhost:' + port + '/'
 
@@ -12,15 +18,24 @@ const loginRoutes = require('./routes/login_routes')
 
 app.set('view engine', 'pug')
 
+app.use('/assets', express.static('public'))
+app.use(bodyParser.urlencoded({extended : true}))
+app.use(bodyParser.json())
 app.use(session({
+    // store : new RedisStore({client}),
+    name : sess_name,
     secret: secret,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: false,
+    cookie: {
+        maxAge : max_age,
+        secure: true,
+        sameSite : true
+    }
 }))
-app.use('/assets', express.static('public'))
-app.use(express.urlencoded({extended : true}))
-app.use(threadRoutes)
+app.use(mw.mwInfo)
+app.use(mw.redisErr)
+app.use(threadRoutes) 
 app.use(loginRoutes)
 app.use(mainRoutes)
 

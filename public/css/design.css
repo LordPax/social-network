@@ -161,6 +161,16 @@ img{
     margin : auto;
     display : block;
 }
+.msgErr{
+    color : #e74c3c;
+    border : 1px solid #e74c3c;
+    font-weight : 400;
+}
+.msgOk{
+    color : #2ecc71;
+    border : 1px solid #2ecc71;
+    font-weight : 400;
+}
 a, .link{
     text-decoration : none;
     color : #3498db;

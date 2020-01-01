@@ -1,15 +1,53 @@
 const db = require('./mysql')
+const {match} = require('../include/lib-perso')
 
 const addUser = (info) => {
-	const str_id = strRandVerif(10)
     db.query('INSERT INTO user SET ?', {
         username : info.username,
         password : info.password,
         email : info.email
     }, (err, res, fields) => { if (err) throw err })
-    return str_id
+}
+
+const searchUserId = (info, callRes, callErr) => {
+    db.query('SELECT * FROM user WHERE username = ? AND password = ?',[
+        info.username, info.password
+    ], (err, res, fields) => {
+        if (err) throw err
+        if (res.length === 1)
+            callRes(res[0].id) 
+        else
+            callErr('psudo ou mot de passe incorrect')
+    })
+}
+
+const nbEmail = (email, callRes, callErr) => {
+    db.query('SELECT COUNT(*) FROM user WHERE email = ?', [email],
+    (err, res, fields) => {
+        if (err) throw err
+        const nb = res[0]['COUNT(*)']
+        if (nb === 0) 
+        	callRes() 
+        else 
+        	callErr('L\'email entrer est déjà utilisé')
+    })
+}
+
+const nbName = (name, callRes, callErr) => {
+    db.query('SELECT COUNT(*) FROM user WHERE username = ?', [name],
+    (err, res, fields) => {
+        if (err) throw err
+        const nb = res[0]['COUNT(*)']
+        if (nb === 0) 
+            callRes() 
+        else 
+            callErr('Le pseudo entrer est déjà utilisé')
+    })
 }
 
 module.exports = {
-	addUser
+    addUser,
+    nbEmail,
+    nbName,
+    searchUserId
 }
