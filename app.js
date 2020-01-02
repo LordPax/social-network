@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 // const redis = require('redis')
 // const RedisStore = require('connect-redis')(session)
 // const client = redis.createClient()
-const {port, secret, sess_name, max_age} = require('./include/data.js')
+const {port, sess_secret, sess_name, sess_max_age} = require('./include/data.js')
 const mw = require('./include/middleware')
 // const rep = require('./socket/socket')
 // client.on('error', console.error)
@@ -24,11 +24,11 @@ app.use(bodyParser.json())
 app.use(session({
     // store : new RedisStore({client}),
     name : sess_name,
-    secret: secret,
+    secret: sess_secret,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge : max_age,
+        maxAge : sess_max_age,
         secure: false,
         sameSite : true
     }

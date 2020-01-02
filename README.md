@@ -37,7 +37,9 @@ Ce fichier servira pour toutes les informations lier à la base de donnée par e
     "mysql_user" : "nom d'utilisateur pour mysql",
     "mysql_pw" : "mot de passe pour mysql",
     "mysql_db" : "winveer",
-    "secret" : "quelque chose de secret"
+    "sess_secret" : "quelque chose de secret",
+    "sess_name" : "session",
+    "sess_max_age" : 3600000
 }
 ```
 

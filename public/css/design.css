@@ -10,6 +10,10 @@ html, body{
 }
 header{
     background-color : #000;
+    position : fixed;
+    width : 100%;
+    top : 0;
+    height : 55px;
 }
 /*============= affichage markdown =============*/
 h1, h2, h3, h4, h5, h6{
@@ -42,7 +46,7 @@ img{
 }
 p{
     /*padding : 5px;*/
-    margin : 5px;
+    margin : 10px;
 }
 /*==============================================*/
 .large{
@@ -53,7 +57,7 @@ p{
 
 }
 .large2{
-    margin-top : 20px;
+    margin-top : 75px;
 }
 .main{
     width : 60%;
@@ -155,6 +159,7 @@ p{
 }
 .info_head{
     margin-top : 10px;
+    display : flex;
 }
 .head_btn{
     margin-left : 10px;
@@ -183,14 +188,16 @@ a, .link:hover{
     color : #2980b9;
 }
 .user_menu{
-    float : right;
+    /*float : right;*/
     background-color : #FFF;
     border-radius : 2px;
     color : #444;
     margin-left : 10px;
     min-width : 150px;
     font-weight : 400;
-    border : 1px solid #FFF;
+    border : 1px solid #A7A7A7;
+    display : inline;
+
 }
 .user_option{
     /*margin-top : 10px;*/
