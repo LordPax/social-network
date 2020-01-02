@@ -40,6 +40,10 @@ code{
 img{
     width : 100%
 }
+p{
+    /*padding : 5px;*/
+    margin : 5px;
+}
 /*==============================================*/
 .large{
     /*border : 1px solid black;*/
@@ -97,7 +101,7 @@ img{
 .info_right{
     float : right;
 }
-.button, .buttonInv, .input_text, .input_area{
+.button, .buttonInv, .input_text, .input_area, .user_opt_sel{
     padding : 5px;
     border-radius : 2px;
     border : 1px solid #A7A7A7;
@@ -177,6 +181,33 @@ a, .link{
 }
 a, .link:hover{
     color : #2980b9;
+}
+.user_menu{
+    float : right;
+    background-color : #FFF;
+    border-radius : 2px;
+    color : #444;
+    margin-left : 10px;
+    min-width : 150px;
+    font-weight : 400;
+    border : 1px solid #FFF;
+}
+.user_option{
+    /*margin-top : 10px;*/
+}
+.user_name{
+    padding : 5px;
+}
+.user_opt_sel{
+    display : block;
+    width : 100%;
+    border-radius : 0;
+    border : 0;
+    font-weight : 300;
+}
+.user_opt_sel:hover{
+    background-color : #3498db;
+    color : #FFF;
 }
 @media(max-width : 1250px){
     .large{

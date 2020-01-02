@@ -29,7 +29,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge : max_age,
-        secure: true,
+        secure: false,
         sameSite : true
     }
 }))

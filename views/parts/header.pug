@@ -5,7 +5,20 @@ header
         div.info_right.info_head
             a(href='/newthread')
                 button.button Nouveau Thread
-            a(href='/register')
-                button.button.head_btn Inscription
-            a(href='/login')
-                button.button.head_btn Connexion
+            - if (!locals.userId)
+                a(href='/register')
+                    button.buttonInv.head_btn Inscription
+                a(href='/login')
+                    button.buttonInv.head_btn Connexion
+            - else
+                div.user_menu
+                    div.user_name #{locals.name}
+                    div.user_option
+                        a(href='/profil/' + locals.name)
+                            button.user_opt_sel Profil
+                        - if (locals.rang != 0)
+                            a(href='')
+                                button.user_opt_sel test 3
+                        a(href='/logout')
+                            button.user_opt_sel Se deconnecter
+                        

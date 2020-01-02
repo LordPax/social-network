@@ -5,16 +5,18 @@ const mw = require('../include/middleware')
 const until = require('../include/until')
 
 app.get('/register', mw.redirectMain, (req, res) => {
-    let info
-    // if (req.session.err) 
-    //  info = {titre: 'Winveer - inscription', err : req.session.err}
-    // else
-    // info = {titre: 'Winveer - inscription'}
+    const {err} = req.session
+    req.session.err = ''
 
-    res.render('pages/register', {titre: 'Winveer - inscription'})
+    res.render('pages/register', {titre: 'Winveer - inscription', err : err})
 })
 
-app.get('/login', mw.redirectMain, (req, res) => res.render('pages/login', {titre: 'Winveer - connexion'}))
+app.get('/login', mw.redirectMain, (req, res) => {
+    const {err} = req.session
+    req.session.err = ''
+
+    res.render('pages/login', {titre: 'Winveer - connexion', err : err})
+})
 
 app.post('/register', mw.redirectMain, (req, res) => {
     const {username, email, password, password2} = req.body
@@ -31,10 +33,8 @@ app.post('/register', mw.redirectMain, (req, res) => {
         })
         res.redirect('/login')
     }, err => {
-        res.render('pages/register', {
-            titre : 'Winveer - inscription',
-            err
-        })
+        req.session.err = err
+        res.redirect('/register')
     })
 })
 
@@ -44,16 +44,22 @@ app.post('/login', mw.redirectMain, (req, res) => {
         username,
         password
     }, id => {
-        console.log(id)
-        res.redirect('/login')
-    }, err => {
-        res.render('pages/login', {
-            titre : 'Winveer - connexion',
-            err
+        req.session.userId = id
+        logModel.searchUserInfo(id, data => {
+            req.session.pseudo = data.username
+            req.session.rang = data.rang
+            res.redirect('/')
         })
+    }, err => {
+        req.session.err = err
+        res.redirect('/login')
     })
+    
 })
 
-app.post('/logout', mw.redirectLogin, (req, res) => {})
+app.get('/logout', mw.redirectLogin, (req, res) => {
+    req.session.destroy()
+    res.redirect('/login')
+})
 
 module.exports = app

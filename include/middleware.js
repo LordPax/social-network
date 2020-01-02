@@ -11,11 +11,17 @@ const redirectMain = (req, res, next) => {
 }
 
 const mwInfo = (req, res, next) => {
-    const {userId} = req.session
-    if (userId) {
-        console.log('test')
-    }
     console.log(req.session)
+    // const {userId} = req.session
+    // if (userId) {
+    //     logModel.searchUserInfo(userId, data => {
+    //         res.locals.pseudo = data.username
+    //         res.locals.rang = data.rang
+    //         console.log('1 : ' + res.locals.pseudo)
+    //         console.log('2 : ' + data.username)
+    //     })
+    //     console.log('3 : ' + res.locals.pseudo)
+    // }
     next()
 }
 
