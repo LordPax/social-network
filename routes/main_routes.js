@@ -1,7 +1,7 @@
 const app = require('express').Router()
 const thModel = require('../models/thread_models')
 const logModel = require('../models/login_models')
-const {refomuleDate} = require('../include/until')
+const {reformuleDate} = require('../include/until')
 const showdown = require('showdown')
 const convert = new showdown.Converter()
 
@@ -10,15 +10,12 @@ app.get('/', (req, res) => {
         res.render('pages/index', {
             titre : 'Winveer - accueil',
             thread : thread.map(elem => {
-                // logModel.nameId(elem.user, name => {
-                //     res.locals.name = name
-                // })
                 return {
                     str_id : elem.str_id,
                     title : elem.title,
                     content : convert.makeHtml(elem.content),
                     user : 'test',
-                    date : refomuleDate(elem.date)
+                    date : reformuleDate(elem.date)
                 }
             }),
             userId : req.session.userId,

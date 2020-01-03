@@ -46,7 +46,7 @@ img{
 }
 p{
     /*padding : 5px;*/
-    margin : 10px;
+    /*margin : 5px;*/
 }
 /*==============================================*/
 .large{
@@ -195,15 +195,15 @@ a, .link:hover{
     margin-left : 10px;
     min-width : 150px;
     font-weight : 400;
-    border : 1px solid #A7A7A7;
+    border : 1px solid #000;/*A7A7A7*/
     display : inline;
-
+    margin-top : -1px;
 }
 .user_option{
     /*margin-top : 10px;*/
 }
 .user_name{
-    padding : 5px;
+    padding : 6px;
 }
 .user_opt_sel{
     display : block;

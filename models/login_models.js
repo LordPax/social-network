@@ -29,6 +29,17 @@ const searchUserInfo = (id, callRes) => {
     })
 }
 
+const searchUserInfoByName = (name, callRes, callErr) => {
+    db.query('SELECT * FROM user WHERE username = ?',[name],
+    (err, res, fields) => {
+        if (err) throw err
+        if (res.length === 1)
+            callRes(res[0])
+        else
+            callErr('Utilisateur introuvable')
+    })
+}
+
 const nbEmail = (email, callRes, callErr) => {
     db.query('SELECT COUNT(*) FROM user WHERE email = ?', [email],
     (err, res, fields) => {
@@ -61,11 +72,21 @@ const nameId = (id, callRes) => {
     })
 }
 
+// function *nameId(id) {
+//     db.query('SELECT username FROM user WHERE id = ?', [id],
+//     (err, res, fields) => {
+//         if (err) throw err
+//         yield (id === 0 ? 'noname' : res[0].username)
+//     })
+//     yield 'tsejtse'
+// }
+
 module.exports = {
     addUser,
     nbEmail,
     nbName,
     searchUserId,
     searchUserInfo,
-    nameId
+    nameId,
+    searchUserInfoByName
 }

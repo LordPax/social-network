@@ -9,7 +9,7 @@ html(lang='fr')
                         div.fen_title #{locals.threadTitle}
                         div.fen_content!=locals.content
                         div.fen_info
-                            a.link(href='/') #{locals.user}
+                            a.link(href='/profil/' + locals.user) #{locals.user}
                             div.info_right #{locals.date}
                     div.fen
                         form.form(method='post' action='')

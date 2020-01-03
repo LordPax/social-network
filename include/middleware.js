@@ -2,16 +2,20 @@ const logModel = require('../models/login_models')
 const {escapeHtml} = require('../include/lib-perso')
 const sha256 = require('sha256')
 
-const redirectLogin = (req, res, next) => {
-    !req.session.userId ? res.redirect('/login') : next()
+const log = (req, res, next) => {
+    req.session.userId ? next() : res.redirect('/')
 }
 
-const redirectMain = (req, res, next) => {
-    req.session.userId ? res.redirect('/') : next()
+const admin = (req, res, next) => {
+    req.session.userId && req.session.rang !== 0 ? next() : res.redirect('/')
+}
+
+const notLog = (req, res, next) => {
+    !req.session.userId ? next() : res.redirect('/')
 }
 
 const mwInfo = (req, res, next) => {
-    console.log(req.session)
+    // console.log(req.session)
     // const {userId} = req.session
     // if (userId) {
     //     logModel.searchUserInfo(userId, data => {
@@ -32,8 +36,9 @@ const redisErr = (req, res, next) => {
 }
 
 module.exports = {
-    redirectLogin,
-    redirectMain,
+    notLog,
+    log,
+    admin,
     mwInfo,
     redisErr
 }

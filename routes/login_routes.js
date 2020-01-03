@@ -4,21 +4,21 @@ const {str_rand, escapeHtml} = require('../include/lib-perso')
 const mw = require('../include/middleware')
 const until = require('../include/until')
 
-app.get('/register', mw.redirectMain, (req, res) => {
+app.get('/register', mw.notLog, (req, res) => {
     const {err} = req.session
     req.session.err = ''
 
     res.render('pages/register', {titre: 'Winveer - inscription', err : err})
 })
 
-app.get('/login', mw.redirectMain, (req, res) => {
+app.get('/login', mw.notLog, (req, res) => {
     const {err} = req.session
     req.session.err = ''
 
     res.render('pages/login', {titre: 'Winveer - connexion', err : err})
 })
 
-app.post('/register', mw.redirectMain, (req, res) => {
+app.post('/register', mw.notLog, (req, res) => {
     const {username, email, password, password2} = req.body
     until.registerVerif({
         username,
@@ -38,7 +38,7 @@ app.post('/register', mw.redirectMain, (req, res) => {
     })
 })
 
-app.post('/login', mw.redirectMain, (req, res) => {
+app.post('/login', mw.notLog, (req, res) => {
     const {username, password} = req.body
     until.loginVerif({
         username,
@@ -57,7 +57,7 @@ app.post('/login', mw.redirectMain, (req, res) => {
     
 })
 
-app.get('/logout', mw.redirectLogin, (req, res) => {
+app.get('/logout', mw.log, (req, res) => {
     req.session.destroy()
     res.redirect('/login')
 })

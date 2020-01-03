@@ -15,6 +15,7 @@ const domain = 'http://localhost:' + port + '/'
 const mainRoutes = require('./routes/main_routes')
 const threadRoutes = require('./routes/thread_routes')
 const loginRoutes = require('./routes/login_routes')
+const userRoutes = require('./routes/user_routes')
 
 app.set('view engine', 'pug')
 
@@ -35,7 +36,8 @@ app.use(session({
 }))
 app.use(mw.mwInfo)
 app.use(mw.redisErr)
-app.use(threadRoutes) 
+app.use(threadRoutes)
+app.use(userRoutes) 
 app.use(loginRoutes)
 app.use(mainRoutes)
 

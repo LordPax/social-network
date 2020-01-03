@@ -1,6 +1,7 @@
 const app = require('express').Router()
 const thModel = require('../models/thread_models')
-const {refomuleDate} = require('../include/until')
+const logModel = require('../models/login_models')
+const {reformuleDate} = require('../include/until')
 const showdown = require('showdown')
 const convert = new showdown.Converter()
 
@@ -16,20 +17,22 @@ app.get('/thread/:id', (req, res) => {
         const id = req.params.id
         thModel.searchThread(id, data => {
             thModel.searchRep(id, rep => {
-                res.render('pages/thread', {
-                    titre : 'Winveer - thread',
-                    threadTitle : data.title,
-                    content : convert.makeHtml(data.content),
-                    reponse : rep.map(elem => { return {
-                        content : convert.makeHtml(elem.content),
-                        user : 'test',
-                        date : refomuleDate(elem.date)
-                    }}),
-                    date : refomuleDate(data.date),
-                    user : 'test',
-                    userId : req.session.userId,
-                    name : req.session.pseudo,
-                    rang : req.session.rang
+                logModel.nameId(data.user, name => {
+                    res.render('pages/thread', {
+                        titre : 'Winveer - thread',
+                        threadTitle : data.title,
+                        content : convert.makeHtml(data.content),
+                        reponse : rep.map(elem => { return {
+                            content : convert.makeHtml(elem.content),
+                            user : 'test',
+                            date : reformuleDate(elem.date)
+                        }}),
+                        date : reformuleDate(data.date),
+                        user : name,
+                        userId : req.session.userId,
+                        name : req.session.pseudo,
+                        rang : req.session.rang
+                    })
                 })
             })
         }, err => res.redirect('/'))
