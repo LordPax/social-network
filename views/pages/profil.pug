@@ -11,6 +11,13 @@ html(lang='fr')
                         div.fen
                             div.fen_title #{locals.profil.name}
                             div.fen_content
+                                - if(locals.userId == locals.profil.userId)
+                                    ='test'
+                                - else
+                                    ='test 2'
+                        div.fen
+                            div.fen_title Ses threads
+                            div.fen_content coming soon
                     
 
         include ../parts/footer.pug

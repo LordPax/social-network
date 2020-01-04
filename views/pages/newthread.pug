@@ -12,5 +12,7 @@ html(lang='fr')
                             textarea.input_area(name='input_content' placeholder='contenu du thread')
                             div.form_right
                                 input.button(type='submit' name='sub' value='Poster')
+                        - if (locals.err)
+                            div.fen.msgErr #{locals.err}
 
         include ../parts/footer.pug

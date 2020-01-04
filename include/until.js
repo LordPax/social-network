@@ -24,7 +24,6 @@ const reformule = (sec, di, df, modif) => {
     .default(() => di.getFullYear() + '/' + (di.getMonth() + 1) + '/' + di.getDate())
 }
 
-
 const reformuleDate = d => {
     const di = new Date(d)
     const df = new Date()

@@ -1,28 +1,20 @@
 const app = require('express').Router()
 const thModel = require('../models/thread_models')
 const logModel = require('../models/login_models')
-const {reformuleDate} = require('../include/until')
-const showdown = require('showdown')
-const convert = new showdown.Converter()
 
 app.get('/', (req, res) => {
+    req.session.currUrl = req.originalUrl
     thModel.threadAcc(10, thread => {
+        // req.session.currUrl = res.baseUrl
         res.render('pages/index', {
             titre : 'Winveer - accueil',
-            thread : thread.map(elem => {
-                return {
-                    str_id : elem.str_id,
-                    title : elem.title,
-                    content : convert.makeHtml(elem.content),
-                    user : 'test',
-                    date : reformuleDate(elem.date)
-                }
-            }),
+            thread : thread,
             userId : req.session.userId,
             name : req.session.pseudo,
             rang : req.session.rang
         })
     })
+
 })
 
 app.get('/404', (req, res) => res.render('pages/notfound', {

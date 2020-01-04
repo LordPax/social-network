@@ -15,7 +15,7 @@ const notLog = (req, res, next) => {
 }
 
 const mwInfo = (req, res, next) => {
-    // console.log(req.session)
+    console.log(req.session)
     // const {userId} = req.session
     // if (userId) {
     //     logModel.searchUserInfo(userId, data => {
@@ -26,6 +26,7 @@ const mwInfo = (req, res, next) => {
     //     })
     //     console.log('3 : ' + res.locals.pseudo)
     // }
+    // req.session.currUrl = req.baseUrl
     next()
 }
 

@@ -48,8 +48,9 @@ app.post('/login', mw.notLog, (req, res) => {
         logModel.searchUserInfo(id, data => {
             req.session.pseudo = data.username
             req.session.rang = data.rang
-            res.redirect('/')
-        })
+            // res.redirect('/')
+            res.redirect(req.session.currUrl ? req.session.currUrl : '/')
+        })    
     }, err => {
         req.session.err = err
         res.redirect('/login')
@@ -58,8 +59,10 @@ app.post('/login', mw.notLog, (req, res) => {
 })
 
 app.get('/logout', mw.log, (req, res) => {
+    const url = req.session.currUrl
     req.session.destroy()
-    res.redirect('/login')
+    // res.redirect('/login')
+    res.redirect(url ? url : '/login')
 })
 
 module.exports = app

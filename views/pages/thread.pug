@@ -16,6 +16,8 @@ html(lang='fr')
                             textarea.input_area(name='input_content' placeholder='contenu de la réponse')
                             div.form_right
                                 input.button(type='submit' name='sub' value='Répondre')
+                        - if (locals.err)
+                            div.fen.msgErr #{locals.err}
                         
                         each rep in locals.reponse
                             div.fen_rep

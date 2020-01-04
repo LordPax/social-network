@@ -4,6 +4,7 @@ const {escapeHtml} = require('../include/lib-perso')
 const mw = require('../include/middleware')
 
 app.get('/profil/:username', (req, res) => {
+    req.session.currUrl = req.originalUrl
     const username = escapeHtml(req.params.username)
     logModel.searchUserInfoByName(username, data => {
         res.render('pages/profil', {
