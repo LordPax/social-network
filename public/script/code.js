@@ -31,12 +31,37 @@
 }*/
 
 $(() => {
-    $('.user_option').hide();
+    $('.user_option').hide()
     $('.user_menu').mouseover(() => {
-        $('.user_option').stop().slideDown(100);
+        $('.user_option').stop().slideDown(100)
     })
     
     $('.user_menu').mouseout(() => {
-        $('.user_option').stop().slideUp(100);
+        $('.user_option').stop().slideUp(100)
+    })
+
+
+    const btn = $('.change_btn')
+    const btn2 = $('.change_btn2')
+    const show = $('.show_info')
+    const change = $('.change_info')
+
+    show.show()
+    btn.show()
+    change.hide()
+    btn2.hide()
+
+    btn.click(() => {
+        show.hide()
+        change.show()
+        btn.hide()
+        btn2.show()
+    })
+
+    btn2.click(() => {
+        show.show()
+        change.hide()
+        btn.show()
+        btn2.hide()
     })
 })

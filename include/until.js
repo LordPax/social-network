@@ -80,6 +80,16 @@ const loginVerif = (data, callRes, callErr) => {
         callErr('Les champs de textes ne doivent pas être vide')
 }
 
+const changeVerif = (data, callRes, callErr) => {
+    if (data.username != '' & data.email != '') {
+        const name = escapeHtml(data.username)
+        const email = escapeHtml(data.email)
+
+        // TODO : verirfication des donnée entrer
+        
+    }
+}
+
 module.exports = {
     reformuleDate,
     registerVerif,

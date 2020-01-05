@@ -100,7 +100,10 @@ p{
     padding-top : 10px;
     padding-left : 10px;
 }
-.fen_info{
+.fen_title_info{
+    float : right;
+    font-weight : 300;
+    font-size : 19px;
 }
 .info_right{
     float : right;
@@ -215,6 +218,9 @@ a, .link:hover{
 .user_opt_sel:hover{
     background-color : #3498db;
     color : #FFF;
+}
+.info_profil{
+    padding-bottom : 5px;
 }
 @media(max-width : 1250px){
     .large{

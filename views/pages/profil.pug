@@ -9,12 +9,30 @@ html(lang='fr')
                         div.fen.msgErr #{locals.err}
                     - else
                         div.fen
-                            div.fen_title #{locals.profil.name}
+                            div.fen_title Profil de #{locals.profil.name}
+                                div.fen_title_info
+                                    - if(locals.userId == locals.profil.userId)
+                                        label.link.change_btn Changer les infos perso
+                                        label.link.change_btn2 X
                             div.fen_content
                                 - if(locals.userId == locals.profil.userId)
-                                    ='test'
+                                    div.show_info
+                                        div.info_profil pseudo : #{locals.profil.name}
+                                        div.info_profil email : #{locals.profil.email}
+                                    div.change_info
+                                        form.form_change(method='post' action = '')
+                                            input.input_text(type='text' name='username' placeholder='Changer de pseudo' value = locals.profil.name)
+                                            input.input_text(type='email' name='email' placeholder='Changer d\'email' value = locals.profil.email)
+                                            input.input_text(type='password' name='password' placeholder='Ancien mot de passe')
+                                            input.input_text(type='password' name='password2' placeholder='Nouveau mot de passe')
+                                            div.form_right
+                                                input.button(type='submit' name='sub' value='Changer')
                                 - else
-                                    ='test 2'
+                                    div.info_profil pseudo : #{locals.profil.name}
+                                    div.info_profil email : #{locals.profil.email}
+
+                                - if (locals.err2)
+                                    div.fen.msgErr #{locals.err2}
                         div.fen
                             div.fen_title Ses threads
                             div.fen_content coming soon
