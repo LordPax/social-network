@@ -1,7 +1,7 @@
 const db = require('./mysql')
 const {str_rand, escapeHtml} = require('../include/lib-perso')
 const logModel = require('./login_models')
-const {reformuleDate} = require('../include/until')
+const until = require('../include/until')
 const showdown = require('showdown')
 const convert = new showdown.Converter()
 
@@ -45,29 +45,29 @@ const searchThread = (id, res, err) => {
     search('SELECT * FROM thread WHERE str_id = ?', [id])
     .then(data => {
         const th = data[0]
-        logModel.nameId(th.user, name => {
-            const thread = {
+        logModel.searchUserInfoByName(th.user, info => {
+            res({
                 str_id : th.str_id,
                 title : th.title,
                 content : convert.makeHtml(th.content),
-                user : name,
-                date : reformuleDate(th.date)
-            }
-
-            res(thread)
+                user : (th.user !== 'noname' && info.rank !== 0) 
+                    ? th.user + ' • ' + until.showRank(info.rank) 
+                    : th.user,
+                date : until.reformuleDate(th.date)
+            })
         })
     })
     .catch(err2 => err(err2))
 }
 
 const searchRep = (id, res) => {
-    search('SELECT * FROM reponse WHERE id_post = ? ORDER BY id DESC', [id])
+    search('SELECT * FROM reponse WHERE id_post = ? ORDER BY id', [id])
     .then(data => {
         const rep = data.map(elem => {
             return {
-                content : convert.makeHtml(elem.content),
-                user : 'test',
-                date : reformuleDate(elem.date)
+                content : elem.content,
+                user : elem.id_user,
+                date : until.reformuleDate(elem.date)
             }
         })
         
@@ -77,20 +77,22 @@ const searchRep = (id, res) => {
 
 const threadAcc = (limit, res) => {
     search('SELECT * FROM thread ORDER BY id DESC LIMIT ?', [limit])
+    // search('SELECT * FROM thread ORDER BY id DESC', [limit])
     .then(data => {
         const thread = data.map(elem => {
-            // const test = yield logModel.nameId2(elem.user).next().value
-            // console.log(test)
             return {
                 str_id : elem.str_id,
                 title : elem.title,
                 content : convert.makeHtml(elem.content),
-                user : 'name',
-                date : reformuleDate(elem.date)
+                user : elem.user,
+                date : until.reformuleDate(elem.date)
             }
         })
+        // thread.forEach(elem => {
+        //     logModel.searchUserInfoByName(elem.user, info => {
 
-        
+        //     })
+        // })
         res(thread)
     })
     .catch(err => {throw err})

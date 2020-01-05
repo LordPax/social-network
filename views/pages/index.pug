@@ -11,7 +11,7 @@ html(lang='fr')
                                 a.link(href='/thread/' + t.str_id) #{t.title}
                             div.fen_content!=t.content
                             div.fen_info
-                                a.link(href='/') #{t.user}
+                                a.link(href='/profil/' + t.user) #{t.user}
                                 div.info_right #{t.date}
                     
 

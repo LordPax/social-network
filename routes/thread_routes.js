@@ -49,7 +49,8 @@ app.post('/newthread', (req, res) => {
 	if (req.body.input_title != '' && req.body.input_content != '') {
         const title = req.body.input_title, content = req.body.input_content
         const {userId} = req.session
-        const id = userId ? userId : 0
+        const {pseudo} = req.session
+        const id = userId ? pseudo : 'noname'
         const str_id = thModel.addThread(title, content, id)
         res.redirect('/thread/' + str_id)
     }
@@ -63,7 +64,8 @@ app.post('/thread/:id', (req, res) => {
     const content = req.body.input_content, str_id = req.params.id
     if (req.body.input_content != '' && req.params.id != '') {
         const {userId} = req.session
-        const id = userId ? userId : 0
+        const {pseudo} = req.session
+        const id = userId ? pseudo : 'noname'
         thModel.repThread(str_id, content, id)
         res.redirect('/thread/' + str_id)
     }

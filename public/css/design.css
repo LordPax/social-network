@@ -99,6 +99,7 @@ p{
     margin-bottom : 10px;
     padding-top : 10px;
     padding-left : 10px;
+    word-break : break-all;
 }
 .fen_title_info{
     float : right;
