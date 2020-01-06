@@ -1,5 +1,5 @@
 const db = require('./mysql')
-const {str_rand, escapeHtml} = require('../include/lib-perso')
+const {str_rand, escapeHtml, sfor} = require('../include/lib-perso')
 const logModel = require('./login_models')
 const until = require('../include/until')
 const showdown = require('showdown')
@@ -80,19 +80,34 @@ const threadAcc = (limit, res) => {
     // search('SELECT * FROM thread ORDER BY id DESC', [limit])
     .then(data => {
         const thread = data.map(elem => {
-            return {
+            th = {
                 str_id : elem.str_id,
                 title : elem.title,
                 content : convert.makeHtml(elem.content),
                 user : elem.user,
                 date : until.reformuleDate(elem.date)
             }
+            return th
         })
-        // thread.forEach(elem => {
-        //     logModel.searchUserInfoByName(elem.user, info => {
-
+        
+        // let thread = []
+        // sfor(data.length, (i, r) => {
+        // // for (let i = 0; i < data.length; i++){
+        //     logModel.searchUserInfoByName(data[i].user, info => {
+        //         thread.push({
+        //             str_id : data[i].str_id,
+        //             title : data[i].title,
+        //             content : convert.makeHtml(data[i].content),
+        //             user : (data[i].user !== 'noname' && info.rank !== 0) 
+        //                 ? data[i].user + ' • ' + until.showRank(info.rank) 
+        //                 : data[i].user,
+        //             date : until.reformuleDate(data[i].date)
+        //         })
+        //         // console.log(thread)
         //     })
+        // // }
         // })
+        // console.log(thread)
         res(thread)
     })
     .catch(err => {throw err})

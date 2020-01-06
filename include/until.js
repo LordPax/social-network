@@ -85,18 +85,17 @@ const changeVerif = (data, callRes, callErr) => {
         const name = escapeHtml(data.username)
         const email = escapeHtml(data.email)
 
-        // TODO : verirfication des donnée entrer
+        // TODO : verirfication des donnée entrée
         
     }
 }
 
-const showRank = (rank) => 
+const showRank = rank => 
 match(rank)
 .case(1, () => 'Admin')
 .case(2, () => 'Modo')
 .case(3, () => 'Contributeur')
 .default(() => 0)
-
 
 module.exports = {
     reformuleDate,
