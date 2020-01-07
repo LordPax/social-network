@@ -55,11 +55,11 @@ const registerVerif = (data, callRes, callErr) => {
                     callRes({name, email, hash})
                 else 
                     callErr('Vous n\'avez pas retapé le mot de passe à l\'identique')
-            }, err => callErr(err))
-        }, err => callErr(err))
+            }, err => callErr(err, {name, email}))
+        }, err => callErr(err, {name, email}))
     }
     else 
-        callErr('Les champs de textes ne doivent pas être vide')
+        callErr('Les champs de textes ne doivent pas être vide', {name : '', email : ''})
 }
 
 const loginVerif = (data, callRes, callErr) => {

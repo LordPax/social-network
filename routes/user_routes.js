@@ -13,11 +13,11 @@ app.get('/profil/:username', (req, res) => {
             titre : 'Winveer - ' + username,
             userId : req.session.userId,
             name : req.session.pseudo,
-            rang : req.session.rang,
+            rank : req.session.rank,
             profil : {
                 userId : data.id,
                 name : username,
-                rang : data.rang,
+                rank : data.rank,
                 email : data.email
             },
             err2 : err
@@ -27,7 +27,7 @@ app.get('/profil/:username', (req, res) => {
             titre : 'Winveer - introuvable',
             userId : req.session.userId,
             name : req.session.pseudo,
-            rang : req.session.rang,
+            rank : req.session.rank,
             err : err
         })
     })
@@ -38,7 +38,7 @@ app.get('/admin', mw.admin, (req, res) => {
         titre : 'Winveer - Panel admin',
         userId : req.session.userId,
         name : req.session.pseudo,
-        rang : req.session.rang,
+        rank : req.session.rank,
     })
 })
 

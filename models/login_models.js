@@ -72,36 +72,6 @@ const nameId = (id, callRes) => {
     })
 }
 
-// const nameId2 = (id) => {
-//     return new Promise((resolve, reject) => {
-//         db.query('SELECT username FROM user WHERE id = ?', [id],
-//         (err, res, fields) => {
-//             if (err) reject(err)
-//             resolve(id === 0 ? 'noname' : res[0].username)
-//         })
-//     })
-// }
-
-// async function nameId2(id) {
-//     const res = await db.query('SELECT username FROM user WHERE id = ?', [id],
-//     (err, res, fields) => {
-//         return id === 0 ? 'noname' : res[0].username
-//     })
-//     console.log(res.then(() => 'test'))
-//     // return id === 0 ? 'noname' : res[0].username
-//     return 0
-// }
-
-// function *nameId2(id) {
-//     const req = db.query('SELECT username FROM user WHERE id = ?', [id],
-//     function(err, res){
-//         if (err) throw err
-//         (id === 0 ? 'noname' : res[0].username)
-//     })
-//     console.log(req('jh', ['jhjg']).then(() => 'zer'))
-//     yield 'tsejtse'
-// }
-
 module.exports = {
     addUser,
     nbEmail,

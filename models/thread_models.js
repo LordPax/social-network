@@ -4,6 +4,7 @@ const logModel = require('./login_models')
 const until = require('../include/until')
 const showdown = require('showdown')
 const convert = new showdown.Converter()
+const wait = require('wait.for')
 
 const search = (q, data) => {
     return new Promise((resolve, reject) => {
@@ -45,14 +46,15 @@ const searchThread = (id, res, err) => {
     search('SELECT * FROM thread WHERE str_id = ?', [id])
     .then(data => {
         const th = data[0]
-        logModel.searchUserInfoByName(th.user, info => {
+        logModel.searchUserInfo(th.user, info => {
             res({
                 str_id : th.str_id,
                 title : th.title,
                 content : convert.makeHtml(th.content),
-                user : (th.user !== 'noname' && info.rank !== 0) 
-                    ? th.user + ' • ' + until.showRank(info.rank) 
-                    : th.user,
+                user : (th.user !== 0 && info.rank !== 0) 
+                    ? info.username + ' • ' + until.showRank(info.rank) 
+                    : info.username,
+                username : info.username,
                 date : until.reformuleDate(th.date)
             })
         })
@@ -63,63 +65,53 @@ const searchThread = (id, res, err) => {
 const searchRep = (id, res) => {
     search('SELECT * FROM reponse WHERE id_post = ? ORDER BY id', [id])
     .then(data => {
-        const rep = data.map(elem => {
-            return {
-                content : elem.content,
-                user : elem.id_user,
-                date : until.reformuleDate(elem.date)
-            }
-        })
-        
-        res(rep)
+        wait.launchFiber(searchUserInfoRepSync, data, res)
     })
+    .catch(err => {throw err})
 }
 
 const threadAcc = (limit, res) => {
     search('SELECT * FROM thread ORDER BY id DESC LIMIT ?', [limit])
     // search('SELECT * FROM thread ORDER BY id DESC', [limit])
     .then(data => {
-        const thread = data.map(elem => {
-            th = {
-                str_id : elem.str_id,
-                title : elem.title,
-                content : convert.makeHtml(elem.content),
-                user : elem.user,
-                date : until.reformuleDate(elem.date)
-            }
-            return th
-        })
-        
-        // let thread = []
-        // sfor(data.length, (i, r) => {
-        // // for (let i = 0; i < data.length; i++){
-        //     logModel.searchUserInfoByName(data[i].user, info => {
-        //         thread.push({
-        //             str_id : data[i].str_id,
-        //             title : data[i].title,
-        //             content : convert.makeHtml(data[i].content),
-        //             user : (data[i].user !== 'noname' && info.rank !== 0) 
-        //                 ? data[i].user + ' • ' + until.showRank(info.rank) 
-        //                 : data[i].user,
-        //             date : until.reformuleDate(data[i].date)
-        //         })
-        //         // console.log(thread)
-        //     })
-        // // }
-        // })
-        // console.log(thread)
-        res(thread)
+        wait.launchFiber(searchUserInfoThreadSync, data, res)
     })
     .catch(err => {throw err})
 }
 
-// function *threadAcc(limit, res) {
-//     yield search('SELECT * FROM thread ORDER BY id DESC LIMIT ?', [limit])
-// }
+const searchUserInfoRepSync = (data, res) => {
+    const rep = data.map(elem => {
+        const [info] = wait.forMethod(db, 'query', 'SELECT * FROM user WHERE id = ?', [elem.id_user])
+        return {
+            content : elem.content,
+            user : (elem.id_user !== 0 && info.rank !== 0) 
+                ? info.username + ' • ' + until.showRank(info.rank) 
+                : info.username,
+            username : info.username,
+            date : until.reformuleDate(elem.date)
+        }
+    })
+    
+    res(rep)
+}
 
-// const searchThread = async id => {
-//     return await db.query('SELECT * FROM thread WHERE id = ?', [id])
-// }
+const searchUserInfoThreadSync = (data, res) => {
+    const thread = data.map(elem => {
+        const [info] = wait.forMethod(db, 'query', 'SELECT * FROM user WHERE id = ?', [elem.user])
+        return {
+            str_id : elem.str_id,
+            title : elem.title,
+            content : convert.makeHtml(elem.content),
+            user : (elem.user !== 0 && info.rank !== 0) 
+                ? info.username + ' • ' + until.showRank(info.rank) 
+                : info.username,
+            username : info.username,
+            date : until.reformuleDate(elem.date)
+        }
+    })
+
+    res(thread)
+}
 
 module.exports = {
     search,

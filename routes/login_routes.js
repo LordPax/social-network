@@ -6,16 +6,18 @@ const until = require('../include/until')
 
 app.get('/register', mw.notLog, (req, res) => {
     const {err} = req.session
+    const {infoLog} = req.session
     req.session.err = ''
+    req.session.infoLog = ''
 
-    res.render('pages/register', {titre: 'Winveer - inscription', err : err})
+    res.render('pages/register', {titre: 'Winveer - inscription', err, infoLog})
 })
 
 app.get('/login', mw.notLog, (req, res) => {
     const {err} = req.session
     req.session.err = ''
 
-    res.render('pages/login', {titre: 'Winveer - connexion', err : err})
+    res.render('pages/login', {titre: 'Winveer - connexion', err})
 })
 
 app.post('/register', mw.notLog, (req, res) => {
@@ -32,8 +34,12 @@ app.post('/register', mw.notLog, (req, res) => {
             password : data.hash
         })
         res.redirect('/login')
-    }, err => {
+    }, (err, data) => {
         req.session.err = err
+        req.session.infoLog = {
+            username : data.name,
+            email : data.email
+        }
         res.redirect('/register')
     })
 })
@@ -47,7 +53,7 @@ app.post('/login', mw.notLog, (req, res) => {
         req.session.userId = id
         logModel.searchUserInfo(id, data => {
             req.session.pseudo = data.username
-            req.session.rang = data.rang
+            req.session.rank = data.rank
             // res.redirect('/')
             res.redirect(req.session.currUrl ? req.session.currUrl : '/')
         })    

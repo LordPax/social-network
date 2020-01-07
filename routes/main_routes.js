@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
             thread : thread,
             userId : req.session.userId,
             name : req.session.pseudo,
-            rang : req.session.rang
+            rank : req.session.rank
         })
     })
 
@@ -21,7 +21,7 @@ app.get('/404', (req, res) => res.render('pages/notfound', {
     titre: 'Winveer - 404',
     userId : req.session.userId,
     name : req.session.pseudo,
-    rang : req.session.rang
+    rank : req.session.rank
 }))
 
 app.get('*', (req, res) => res.redirect('/404'))

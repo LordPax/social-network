@@ -7,7 +7,7 @@ const log = (req, res, next) => {
 }
 
 const admin = (req, res, next) => {
-    req.session.userId && req.session.rang !== 0 ? next() : res.redirect('/')
+    req.session.userId && req.session.rank !== 0 ? next() : res.redirect('/')
 }
 
 const notLog = (req, res, next) => {
