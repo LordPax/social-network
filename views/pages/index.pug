@@ -4,7 +4,18 @@ html(lang='fr')
         include ../parts/header.pug
         section
             div.large.large2
-                div.main_actu
+                div.second
+                    div.fen
+                        div.fen_title Thread épinglé
+                        div.fen_content
+                            each ep in locals.epingle
+                                div.epingle
+                                    div.epingle_title
+                                        a.link(href='/thread/' + ep.str_id) #{ep.title}
+                                    div.epingle_user
+                                        a.link(href='/profil/' + ep.username) #{ep.user}
+                                    div.epingle_temps #{ep.date}
+                div.main
                     each t in locals.thread
                         div.fen
                             div.fen_title 
@@ -14,8 +25,19 @@ html(lang='fr')
                                 a.link(href='/profil/' + t.username) #{t.user}
                                 div.info_right #{t.date}
                     
-                div.second
-                    div.fen
-                        div.fen_title test
-                        div.fen_content truc de test
+                //- div.second
+                //-     div.fen
+                //-         div.fen_title Thread épinglé
+                //-         div.fen_content
+                //-             div.epingle
+                //-                 div.epingle_info.epingle_title
+                //-                     a.link() Un super thread
+                //-                 div.epingle_info LordPax • Admin
+                //-                 div.epingle_info.epingle_temps 5 jours
+                //-             div.epingle
+                //-                 div.epingle_info.epingle_title
+                //-                     a.link() Les regles elementaire
+                //-                 div.epingle_info LordPax • Admin
+                //-                 div.epingle_info.epingle_temps 3 heurs
+
         include ../parts/footer.pug

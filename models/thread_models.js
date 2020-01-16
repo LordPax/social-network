@@ -79,6 +79,16 @@ const threadAcc = (limit, res) => {
     .catch(err => {throw err})
 }
 
+const searchEpingle = callRes => {
+    db.query('SELECT * FROM epingle', (err, res, fields) => {
+        if (err) throw err
+
+        wait.launchFiber(searchThreadInfoEpingleSync, res, (dataTh) => {
+            wait.launchFiber(searchUserInfoThreadSync, dataTh, callRes)
+        })
+    })
+}
+
 const searchUserInfoRepSync = (data, res) => {
     const rep = data.map(elem => {
         const [info] = wait.forMethod(db, 'query', 'SELECT * FROM user WHERE id = ?', [elem.id_user])
@@ -113,6 +123,21 @@ const searchUserInfoThreadSync = (data, res) => {
     res(thread)
 }
 
+const searchThreadInfoEpingleSync = (data, res) => {
+    const epingle = data.map(elem => {
+        const [info] = wait.forMethod(db, 'query', 'SELECT * FROM thread WHERE str_id = ?', [elem.id_thread])
+        return {
+            str_id : info.str_id,
+            title : info.title,
+            content : '',
+            user : info.user,
+            date : info.date
+        }
+    })
+
+    res(epingle)
+}
+
 module.exports = {
     search,
     addThread,
@@ -121,5 +146,6 @@ module.exports = {
     query : db.query,
     threadAcc,
     repThread,
-    searchRep
+    searchRep,
+    searchEpingle
 }

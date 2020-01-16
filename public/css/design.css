@@ -18,10 +18,12 @@ header{
 /*============= affichage markdown =============*/
 h1, h2, h3, h4, h5, h6{
     font-weight : 400;
+    margin-top : 12px;
+    margin-bottom : 12px;
 }
 h1, h2{
     border-bottom : 1px solid #EFEFEF;
-    padding-bottom : 5px;
+    padding-bottom : 10px;
 }
 h1{
     font-size : 30px;
@@ -58,14 +60,15 @@ p{
 }
 .large2{
     margin-top : 75px;
-    display : flex;
+    /*display : flex;*/
 }
 .main{
-    width : 60%;
+    width : 59.5%;
 }
 .second{
-    width : 49.5%;
+    width : 39.5%;
     margin-left : 1%;
+    float : right;
 }
 .main_actu{
     width : 49.5%;
@@ -76,7 +79,7 @@ p{
     width : 400px;
     margin-left : auto;
     margin-right : auto;
-    margin-top : 100px;
+    margin-top : 200px;
 }
 .logo{
     height : 45px;
@@ -108,6 +111,7 @@ p{
 }
 .fen_name{
     /*font-weight : 400;*/
+    font-size : 15px;
 }
 .fen_rep{
 
@@ -125,6 +129,9 @@ p{
 }
 .info_right{
     float : right;
+}
+.fen_info{
+    font-size : 15px;
 }
 .button, .buttonInv, .input_text, .input_area, .user_opt_sel{
     padding : 5px;
@@ -244,6 +251,25 @@ a, .link:hover{
 .info_profil{
     padding-bottom : 5px;
 }
+.epingle{
+    display : flex;
+    padding-top : 7px;
+    padding-bottom : 7px;
+}
+.epingle_user{
+    text-align : right;
+    width : 35%;
+}
+.epingle_title{
+    font-weight : 400;
+    text-align : left;
+    width : 48%;
+}
+.epingle_temps{
+    text-align : right;
+    width : 20%;
+}
+
 @media(max-width : 1250px){
     .large{
         width : 1000px;
@@ -252,11 +278,12 @@ a, .link:hover{
 @media(max-width : 1050px){
     .large{
         width : 800px;
-        display : block;
+        /*display : block;*/
     }
     .second{
         width : 100%;
         margin-left : 0;
+        float : none;
     }
     .main_actu{
         width : 100%;
