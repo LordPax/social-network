@@ -6,7 +6,7 @@ const until = require('../include/until')
 
 app.get('/register', mw.notLog, (req, res) => {
     const {err} = req.session
-    const {infoLog} = req.session
+    const infoLog = req.session.infoLog ? req.session.infoLog : ''
     req.session.err = ''
     req.session.infoLog = ''
 

@@ -7,13 +7,15 @@ html(lang='fr')
                 div.main
                     div.fen
                         div.fen_title #{locals.threadTitle}
+                    div.fen
+                        //- div.fen_title #{locals.threadTitle}
                         div.fen_content!=locals.content
                         div.fen_info
                             a.link(href='/profil/' + locals.username) #{locals.user}
                             div.info_right #{locals.date}
                     div.fen
                         form.form(method='post' action='')
-                            textarea.input_area(name='input_content' placeholder='contenu de la réponse')
+                            textarea.input_area.input_area_rep(name='input_content' placeholder='contenu de la réponse')
                             div.form_right
                                 input.button(type='submit' name='sub' value='Répondre')
                         - if (locals.err)

@@ -4,15 +4,18 @@ html(lang='fr')
         include ../parts/header.pug
         section
             div.large.large2
-                div.main
+                div.main_actu
                     each t in locals.thread
                         div.fen
                             div.fen_title 
                                 a.link(href='/thread/' + t.str_id) #{t.title}
-                            div.fen_content!=t.content
+                            div.fen_content.fen_hide!=t.content
                             div.fen_info
                                 a.link(href='/profil/' + t.username) #{t.user}
                                 div.info_right #{t.date}
                     
-
+                div.second
+                    div.fen
+                        div.fen_title test
+                        div.fen_content truc de test
         include ../parts/footer.pug

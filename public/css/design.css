@@ -45,8 +45,8 @@ img{
     width : 100%
 }
 p{
-    /*padding : 5px;*/
-    /*margin : 5px;*/
+    margin-top : 8px;
+    margin-bottom : 8px;
 }
 /*==============================================*/
 .large{
@@ -58,13 +58,25 @@ p{
 }
 .large2{
     margin-top : 75px;
+    display : flex;
 }
 .main{
     width : 60%;
 }
+.second{
+    width : 49.5%;
+    margin-left : 1%;
+}
+.main_actu{
+    width : 49.5%;
+    margin-left : auto;
+    margin-right : auto;
+}
 .main_centre{
     width : 400px;
-    margin : auto;
+    margin-left : auto;
+    margin-right : auto;
+    margin-top : 100px;
 }
 .logo{
     height : 45px;
@@ -77,6 +89,8 @@ p{
     padding : 10px;
     border-radius : 5px;
     margin-bottom : 15px;
+    /*box-shadow : 0px 5px 5px -5px #B8B8B8;*/
+    border : 1px solid #bdc3c7;
 }
 .fen_title{
     font-weight : 400;
@@ -84,10 +98,13 @@ p{
     /*text-transform : uppercase;*/
 }
 .fen_content{
-    margin-bottom : 10px;
+    padding-bottom : 10px;
     padding-top : 10px;
     word-break : break-all;
-    /*padding-left : 10px;*/
+}
+.fen_hide{
+    /*max-height : 300px;
+    overflow : auto;*/
 }
 .fen_name{
     /*font-weight : 400;*/
@@ -125,13 +142,17 @@ p{
     display : block;
     width : 100%;
     margin-bottom : 10px;
+    box-shadow: 0 0 5px -2px gray inset;
 }
 .input_text{
     
 }
 .input_area{
     height : 200px;
-    resize: none;
+    resize: vertical;
+}
+.input_area_rep{
+    height : 130px;
 }
 .input_sub{
     /*display : inline;*/
@@ -231,6 +252,16 @@ a, .link:hover{
 @media(max-width : 1050px){
     .large{
         width : 800px;
+        display : block;
+    }
+    .second{
+        width : 100%;
+        margin-left : 0;
+    }
+    .main_actu{
+        width : 100%;
+        /*margin-left : auto;
+        margin-right : auto;*/
     }
     .main{
         width : 100%;
