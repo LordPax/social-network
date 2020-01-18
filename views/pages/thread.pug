@@ -7,6 +7,8 @@ html(lang='fr')
                 div.main
                     div.fen
                         div.fen_title #{locals.threadTitle}
+                            div.info_right
+                                img.more_btn(src='/assets/images/more_btn.png')
                     div.fen
                         //- div.fen_title #{locals.threadTitle}
                         div.fen_content!=locals.content

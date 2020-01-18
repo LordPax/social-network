@@ -3,13 +3,22 @@ header
         a.link(href='/')
             img.logo(src='/assets/images/logo.png')
         div.info_right.info_head
-            a(href='/newthread')
-                button.button Nouveau Thread
+            a.view1(href='/newthread')
+                button.button Nouveau Thread      
             - if (!locals.userId)
-                a(href='/register')
+                a.view1(href='/register')
                     button.buttonInv.head_btn Inscription
-                a(href='/login')
+                a.view1(href='/login')
                     button.buttonInv.head_btn Connexion
+                div.user_menu.view2
+                    div.user_name Menu
+                    div.user_option
+                        a(href='/register')
+                            button.user_opt_sel Inscription
+                        a(href='/login')
+                            button.user_opt_sel Connexion
+                        a.view2(href='/newthread')
+                            button.user_opt_sel Nouveau Thread
             - else
                 div.user_menu
                     div.user_name #{locals.name}
@@ -19,6 +28,8 @@ header
                         - if (locals.rank != 0)
                             a(href='/admin')
                                 button.user_opt_sel Panel admin
+                        a.view2(href='/newthread')
+                            button.user_opt_sel Nouveau Thread
                         a(href='/logout')
                             button.user_opt_sel Se deconnecter
                         

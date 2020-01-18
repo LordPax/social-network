@@ -42,6 +42,7 @@ code{
     display : block;
     padding : 5px;
     border-radius : 5px;
+    overflow : auto;
 }
 img{
     width : 100%
@@ -255,6 +256,7 @@ a, .link:hover{
     display : flex;
     padding-top : 7px;
     padding-bottom : 7px;
+    border-top : 1px solid #EFEFEF;
 }
 .epingle_user{
     text-align : right;
@@ -268,6 +270,16 @@ a, .link:hover{
 .epingle_temps{
     text-align : right;
     width : 20%;
+}
+.view2{
+    display : none;
+}
+.view1{
+    display : block;
+}
+.more_btn{
+    height : 20px;
+    width : initial;
 }
 
 @media(max-width : 1250px){
@@ -300,6 +312,14 @@ a, .link:hover{
     }
     .main{
         width : 100%;
+    }
+}
+@media(max-width : 700px){
+    .view2{
+        display : block;
+    }
+    .view1{
+        display : none;
     }
 }
 @font-face {
