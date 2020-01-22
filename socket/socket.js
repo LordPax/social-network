@@ -22,8 +22,6 @@ const init = io => {
                         })
                     })
                 }
-                console.log(data)
-                
             })
         })
     }
