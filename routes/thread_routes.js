@@ -14,7 +14,7 @@ app.get('/newthread', (req, res) => {
         userId : req.session.userId,
         name : req.session.pseudo,
         rank : req.session.rank,
-        err : err
+        err
     })
 })
 
@@ -36,11 +36,12 @@ app.get('/thread/:id', (req, res) => {
                         date : data.date,
                         user : data.user,
                         username : data.username,
+                        userIdT : data.userId,
                         userId : req.session.userId,
                         epingle,
                         name : req.session.pseudo,
                         rank : req.session.rank,
-                        err : err
+                        err
                     })
                 })
             })

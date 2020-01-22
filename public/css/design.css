@@ -284,6 +284,7 @@ a, .link:hover{
 .more_btn{
     height : 20px;
     width : initial;
+    margin-left : 5px;
 }
 
 @media(max-width : 1250px){
@@ -324,6 +325,9 @@ a, .link:hover{
     }
     .view1{
         display : none;
+    }
+    .main_centre{
+        width : 250px;
     }
 }
 @font-face {

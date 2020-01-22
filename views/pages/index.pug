@@ -21,25 +21,16 @@ html(lang='fr')
                             div.fen_title 
                                 a.link(href='/thread/' + t.str_id) #{t.title}
                                 div.info_right
-                                    img.more_btn(src='/assets/images/more_btn.png')
+                                    //- img.more_btn(src='/assets/images/more_btn.png')
+                                    - if (locals.userId != 0 && locals.rank == 1)
+                                        img.more_btn(src='/assets/images/epingle_no.png')
+                                    - if (locals.userId != 0 && t.userId == locals.userId)
+                                        img.more_btn(src='/assets/images/edit.png')
+                                    - if (locals.userId != 0 && (t.userId == locals.userId || locals.rank == 1))
+                                        img.more_btn(src='/assets/images/delete.png')
                             div.fen_content.fen_hide!=t.content
                             div.fen_info
                                 a.link(href='/profil/' + t.username) #{t.user}
                                 div.info_right #{t.date}
-                    
-                //- div.second
-                //-     div.fen
-                //-         div.fen_title Thread épinglé
-                //-         div.fen_content
-                //-             div.epingle
-                //-                 div.epingle_info.epingle_title
-                //-                     a.link() Un super thread
-                //-                 div.epingle_info LordPax • Admin
-                //-                 div.epingle_info.epingle_temps 5 jours
-                //-             div.epingle
-                //-                 div.epingle_info.epingle_title
-                //-                     a.link() Les regles elementaire
-                //-                 div.epingle_info LordPax • Admin
-                //-                 div.epingle_info.epingle_temps 3 heurs
 
         include ../parts/footer.pug

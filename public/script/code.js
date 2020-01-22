@@ -30,7 +30,6 @@
     })
 }*/
 
-// const rep = io.connect('http://192.168.1.24:8081/reponse')
 const rep = io.connect('/reponse')
 
 $(() => {
@@ -42,7 +41,7 @@ $(() => {
         e.preventDefault()
         rep.emit('rep', {id, input_content})
         
-        return false;
+        return false
     })
 
     rep.on('retour', data => {
@@ -89,5 +88,28 @@ $(() => {
         change.hide()
         btn.show()
         btn2.hide()
+    })
+
+    $('.newthread_pop').hide()
+    $('.newthread_btn').click(() => {
+        $('.newthread_pop').show()
+    })
+    $('.newthread_close').click(() => {
+        $('.newthread_pop').hide()
+    })
+
+    $('.form_th').submit(e => {
+        const title = $('.input_text').val()
+        const content = $('.input_area').val()
+        if (title == '' || content == '') {
+            e.preventDefault()
+            $('.err').html(`
+                <div class = "fen msgErr">
+                    Les champs de textes ne doivent pas être vide
+                </div>
+            `)
+            return false
+        }
+
     })
 })

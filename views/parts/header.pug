@@ -3,8 +3,8 @@ header
         a.link(href='/')
             img.logo(src='/assets/images/logo.png')
         div.info_right.info_head
-            a.view1(href='/newthread')
-                button.button Nouveau Thread      
+            span.view1
+                button.button.newthread_btn Nouveau Thread      
             - if (!locals.userId)
                 a.view1(href='/register')
                     button.buttonInv.head_btn Inscription
@@ -17,8 +17,8 @@ header
                             button.user_opt_sel Inscription
                         a(href='/login')
                             button.user_opt_sel Connexion
-                        a.view2(href='/newthread')
-                            button.user_opt_sel Nouveau Thread
+                        span.view2
+                            button.user_opt_sel.newthread_btn Nouveau Thread
             - else
                 div.user_menu
                     div.user_name #{locals.name}
@@ -28,8 +28,21 @@ header
                         - if (locals.rank != 0)
                             a(href='/admin')
                                 button.user_opt_sel Panel admin
-                        a.view2(href='/newthread')
-                            button.user_opt_sel Nouveau Thread
+                        span.view2
+                            button.user_opt_sel.newthread_btn Nouveau Thread
                         a(href='/logout')
                             button.user_opt_sel Se deconnecter
+
+        div.popup.newthread_pop
+            div.popup_fen
+                div.popup_fen_title Nouveau Thread
+                    div.info_right.newthread_close
+                        label X
+                div.popup_fen_content
+                    form.form.form_th(method='post' action='/newthread')
+                        input.input_text(type='text' name='input_title' placeholder='titre du thread')
+                        textarea.input_area(name='input_content' placeholder='contenu du thread')
+                        div.form_right
+                            input.button.log_btn(type='submit' name='sub' value='Poster')
+                    div.err
                         

@@ -55,6 +55,7 @@ const searchThread = (id, res, err) => {
                     ? info.username + ' • ' + until.showRank(info.rank) 
                     : info.username,
                 username : info.username,
+                userId : th.user,
                 date : until.reformuleDate(th.date)
             })
         })
@@ -116,6 +117,7 @@ const searchUserInfoThreadSync = (data, res) => {
                 ? info.username + ' • ' + until.showRank(info.rank) 
                 : info.username,
             username : info.username,
+            userId : elem.user,
             date : until.reformuleDate(elem.date)
         }
     })

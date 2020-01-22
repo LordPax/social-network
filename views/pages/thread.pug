@@ -19,7 +19,13 @@ html(lang='fr')
                     div.fen
                         div.fen_title #{locals.threadTitle}
                             div.info_right
-                                img.more_btn(src='/assets/images/more_btn.png')
+                                //- img.more_btn(src='/assets/images/more_btn.png')
+                                - if (locals.userId != 0 && locals.rank == 1)
+                                    img.more_btn(src='/assets/images/epingle_no.png')
+                                - if (locals.userId != 0 && locals.userIdT == locals.userId)
+                                    img.more_btn(src='/assets/images/edit.png')
+                                - if (locals.userId != 0 && (locals.userIdT == locals.userId || locals.rank == 1))
+                                    img.more_btn(src='/assets/images/delete.png')
                     div.fen
                         //- div.fen_title #{locals.threadTitle}
                         div.fen_content!=locals.content
