@@ -26,18 +26,22 @@ app.get('/thread/:id', (req, res) => {
         const id = req.params.id
         thModel.searchThread(id, data => {
             thModel.searchRep(id, rep => {
-                res.render('pages/thread', {
-                    titre : 'Winveer - thread',
-                    threadTitle : data.title,
-                    content : data.content,
-                    reponse : rep,
-                    date : data.date,
-                    user : data.user,
-                    username : data.username,
-                    userId : req.session.userId,
-                    name : req.session.pseudo,
-                    rank : req.session.rank,
-                    err : err
+                thModel.searchEpingle(epingle => {
+                    res.render('pages/thread', {
+                        titre : 'Winveer - thread',
+                        str_id : data.str_id,
+                        threadTitle : data.title,
+                        content : data.content,
+                        reponse : rep,
+                        date : data.date,
+                        user : data.user,
+                        username : data.username,
+                        userId : req.session.userId,
+                        epingle,
+                        name : req.session.pseudo,
+                        rank : req.session.rank,
+                        err : err
+                    })
                 })
             })
         }, err => res.redirect('/'))
@@ -61,19 +65,19 @@ app.post('/newthread', (req, res) => {
     }
 })
 
-app.post('/thread/:id', (req, res) => {
-    const content = req.body.input_content, str_id = req.params.id
-    if (req.body.input_content != '' && req.params.id != '') {
-        const {userId} = req.session
-        const {pseudo} = req.session
-        const id = userId ? userId : 0
-        thModel.repThread(str_id, content, id)
-        res.redirect('/thread/' + str_id)
-    }
-    else {
-        req.session.err = 'Les champs de textes ne doivent pas être vide'
-        res.redirect('/thread/' + str_id)
-    }
-})
+// app.post('/thread/:id', (req, res) => {
+//     const content = req.body.input_content, str_id = req.params.id
+//     if (req.body.input_content != '' && req.params.id != '') {
+//         const {userId} = req.session
+//         const {pseudo} = req.session
+//         const id = userId ? userId : 0
+//         thModel.repThread(str_id, content, id)
+//         res.redirect('/thread/' + str_id)
+//     }
+//     else {
+//         req.session.err = 'Les champs de textes ne doivent pas être vide'
+//         res.redirect('/thread/' + str_id)
+//     }
+// })
 
 module.exports = app

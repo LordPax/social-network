@@ -2,13 +2,13 @@ const express = require('express')
 const session = require('express-session')
 const app = express()
 const bodyParser = require('body-parser')
-// const redis = require('redis')
-// const RedisStore = require('connect-redis')(session)
-// const client = redis.createClient()
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+const sock = require('./socket/socket')(io)
+// const SessionStore = require('session-file-store')(session)
+
 const {port, sess_secret, sess_name, sess_max_age} = require('./include/data.js')
 const mw = require('./include/middleware')
-// const rep = require('./socket/socket')
-// client.on('error', console.error)
 
 const domain = 'http://localhost:' + port + '/'
 
@@ -17,13 +17,8 @@ const threadRoutes = require('./routes/thread_routes')
 const loginRoutes = require('./routes/login_routes')
 const userRoutes = require('./routes/user_routes')
 
-app.set('view engine', 'pug')
-
-app.use('/assets', express.static('public'))
-app.use(bodyParser.urlencoded({extended : true}))
-app.use(bodyParser.json())
-app.use(session({
-    // store : new RedisStore({client}),
+const sess = session({
+    // store : new SessionStore({path : './tmp/sessions'}),
     name : sess_name,
     secret: sess_secret,
     resave: false,
@@ -33,12 +28,25 @@ app.use(session({
         secure: false,
         sameSite : true
     }
-}))
-app.use(mw.mwInfo)
-app.use(mw.redisErr)
+})
+
+app.set('view engine', 'pug')
+
+app.use('/assets', express.static('public'))
+app.use(bodyParser.urlencoded({extended : true}))
+app.use(bodyParser.json())
+app.use(sess)
+// app.use(mw.mwInfo)
+// app.use(mw.redisErr)
 app.use(threadRoutes)
 app.use(userRoutes) 
 app.use(loginRoutes)
 app.use(mainRoutes)
 
-app.listen(port, () => console.log('Ecoute le port', port, '...'))
+io.of('/reponse').use((socket, next) => {
+    sess(socket.handshake, {}, next)
+})
+
+sock.reponse('/reponse')
+
+http.listen(port, () => console.log('Ecoute le port', port, '...'))

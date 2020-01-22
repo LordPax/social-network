@@ -4,6 +4,17 @@ html(lang='fr')
         include ../parts/header.pug
         section
             div.large.large2
+                div.second
+                    div.fen
+                        div.fen_title Thread épinglé
+                        div.fen_content
+                            each ep in locals.epingle
+                                div.epingle
+                                    div.epingle_title
+                                        a.link(href='/thread/' + ep.str_id) #{ep.title}
+                                    div.epingle_user
+                                        a.link(href='/profil/' + ep.username) #{ep.user}
+                                    div.epingle_temps #{ep.date}
                 div.main
                     div.fen
                         div.fen_title #{locals.threadTitle}
@@ -16,19 +27,24 @@ html(lang='fr')
                             a.link(href='/profil/' + locals.username) #{locals.user}
                             div.info_right #{locals.date}
                     div.fen
-                        form.form(method='post' action='')
+                        
+                        div.rep
+                            each rep in locals.reponse
+                                div.fen_rep
+                                    div.fen_name 
+                                        a.link(href='/profil/' + rep.username) #{rep.user}
+                                        div.info_right #{rep.date}
+                                    div.fen_rep_content!=rep.content
+
+                        form#form_rep.form(method='post' action='')
+                            input.id_thread(type='hidden' value=locals.str_id)
                             textarea.input_area.input_area_rep(name='input_content' placeholder='contenu de la réponse')
                             div.form_right
                                 input.button(type='submit' name='sub' value='Répondre')
                         - if (locals.err)
                             div.fen.msgErr #{locals.err}
-                        
-                        each rep in locals.reponse
-                            div.fen_rep
-                                div.fen_name 
-                                    a.link(href='/profil/' + rep.username) #{rep.user}
-                                    div.info_right #{rep.date}
-                                div.fen_rep_content!=rep.content
+
+
                             
 
         include ../parts/footer.pug

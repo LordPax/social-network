@@ -16,9 +16,6 @@ html(lang='fr')
                                         label.link.change_btn2 X
                             div.fen_content
                                 - if(locals.userId == locals.profil.userId)
-                                    div.show_info
-                                        div.info_profil pseudo : #{locals.profil.name}
-                                        div.info_profil email : #{locals.profil.email}
                                     div.change_info
                                         form.form_change(method='post' action = '')
                                             input.input_text(type='text' name='username' placeholder='Changer de pseudo' value = locals.profil.name)
@@ -27,9 +24,6 @@ html(lang='fr')
                                             input.input_text(type='password' name='password2' placeholder='Nouveau mot de passe')
                                             div.form_right
                                                 input.button(type='submit' name='sub' value='Changer')
-                                - else
-                                    div.info_profil pseudo : #{locals.profil.name}
-                                    div.info_profil email : #{locals.profil.email}
 
                                 - if (locals.err2)
                                     div.fen.msgErr #{locals.err2}

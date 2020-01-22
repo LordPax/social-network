@@ -30,7 +30,33 @@
     })
 }*/
 
+// const rep = io.connect('http://192.168.1.24:8081/reponse')
+const rep = io.connect('/reponse')
+
 $(() => {
+    $('#form_rep').submit(e => {
+        const id = $('.id_thread').val()
+        const input_content = $('.input_area_rep').val()
+        $('.input_area_rep').val('')
+
+        e.preventDefault()
+        rep.emit('rep', {id, input_content})
+        
+        return false;
+    })
+
+    rep.on('retour', data => {
+        $('.rep').append(`
+            <div class = "fen_rep">
+                <div class = "fen_name">
+                    <a class = "link" href = "/profil/${data.username}">${data.user}</a>
+                    <div class = "info_right">${data.date}</div>
+                </div>
+                <div class = "fen_rep_content">${data.content}</div>
+            </div>
+        `)
+    })
+
     $('.user_option').hide()
     $('.user_menu').mouseover(() => {
         $('.user_option').stop().slideDown(100)

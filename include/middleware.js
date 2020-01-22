@@ -16,7 +16,6 @@ const notLog = (req, res, next) => {
 
 const mwInfo = (req, res, next) => {
     // console.log(req.session)
-    
     next()
 }
 
