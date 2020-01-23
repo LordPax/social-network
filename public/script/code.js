@@ -31,8 +31,64 @@
 }*/
 
 const rep = io.connect('/reponse')
+const ep = io.connect('/epingle')
+
+const showMore = id => {
+    const btn = $('.t_' + id + ' .fen_show .link')
+    const showContent = $('.t_' + id + ' .fen_content')
+    showContent.removeClass('fen_hide')
+    btn.text('Afficher moin')
+    btn.attr('onclick', 'showLess("' + id + '")')
+}
+
+const showLess = id => {
+    const btn = $('.t_' + id + ' .fen_show .link')
+    const showContent = $('.t_' + id + ' .fen_content')
+    showContent.addClass('fen_hide')
+    btn.text('Afficher plus')
+    btn.attr('onclick', 'showMore("' + id + '")')
+}
+
+const showMoreOk = id => {
+    const btn = $('.t_' + id + ' .fen_show')
+    const showContent = $('.t_' + id + ' .fen_content')
+    const taille = showContent.height()
+    if (taille < 500)
+        btn.hide()
+    // alert('salur ' + id)
+}
+
+const removePopupTread = id => $('.delete_pop').show()
+
+const epingleOkThread = id => {
+    const epingle = $('.t_' + id + ' .fen_title .info_right .ep')
+    epingle.attr('src', '/assets/images/epingle_ok.png')
+    epingle.attr('onclick', 'epingleNoThread("' + id + '")')
+    ep.emit('epingle', {id, mode : '1'})
+}
+
+const epingleNoThread = id => {
+    const epingle = $('.t_' + id + ' .fen_title .info_right .ep')
+    epingle.attr('src', '/assets/images/epingle_no.png')
+    epingle.attr('onclick', 'epingleOkThread("' + id + '")')
+    ep.emit('epingle', {id, mode : '0'})
+}
+
+// ep.on('retourEp', data => {
+//     const epingle = $('.t_' + data.id + ' .fen_title .info_right .ep')
+//     if (data.mode == 1){
+//         epingle.attr('src', '/assets/images/epingle_ok.png')
+//         epingle.attr('onclick', 'epingleNoThread("' + data.id + '")')
+//     }
+//     else{
+//         epingle.attr('src', '/assets/images/epingle_no.png')
+//         epingle.attr('onclick', 'epingleOkThread("' + data.id + '")')
+//     }
+// })
 
 $(() => {
+    $('.delete_pop').hide()
+
     $('#form_rep').submit(e => {
         const id = $('.id_thread').val()
         const input_content = $('.input_area_rep').val()
@@ -94,8 +150,8 @@ $(() => {
     $('.newthread_btn').click(() => {
         $('.newthread_pop').show()
     })
-    $('.newthread_close').click(() => {
-        $('.newthread_pop').hide()
+    $('.close').click(() => {
+        $('.popup').hide()
     })
 
     $('.form_th').submit(e => {
@@ -112,4 +168,6 @@ $(() => {
         }
 
     })
+
+
 })

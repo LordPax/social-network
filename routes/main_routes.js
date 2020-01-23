@@ -5,8 +5,8 @@ const logModel = require('../models/login_models')
 app.get('/', (req, res) => {
     req.session.currUrl = req.originalUrl
     thModel.threadAcc(10, thread => {
-        // req.session.currUrl = res.baseUrl
         thModel.searchEpingle(epingle => {
+            // console.log(thread)
             res.render('pages/index', {
                 titre : 'Winveer - accueil',
                 thread,

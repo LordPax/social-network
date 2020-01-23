@@ -16,16 +16,18 @@ html(lang='fr')
                                         a.link(href='/profil/' + ep.username) #{ep.user}
                                     div.epingle_temps #{ep.date}
                 div.main
-                    div.fen
+                    div.fen(class = 't_' + locals.str_id)
                         div.fen_title #{locals.threadTitle}
                             div.info_right
-                                //- img.more_btn(src='/assets/images/more_btn.png')
                                 - if (locals.userId != 0 && locals.rank == 1)
-                                    img.more_btn(src='/assets/images/epingle_no.png')
+                                    - if (locals.isEp == 0)
+                                        img.more_btn.ep(src='/assets/images/epingle_no.png' onclick='epingleOkThread("' + locals.str_id + '")')
+                                    - else
+                                        img.more_btn.ep(src='/assets/images/epingle_ok.png' onclick='epingleNoThread("' + locals.str_id + '")')
                                 - if (locals.userId != 0 && locals.userIdT == locals.userId)
-                                    img.more_btn(src='/assets/images/edit.png')
+                                    img.more_btn.edit(src='/assets/images/edit.png')
                                 - if (locals.userId != 0 && (locals.userIdT == locals.userId || locals.rank == 1))
-                                    img.more_btn(src='/assets/images/delete.png')
+                                    img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupTread("' + locals.str_id + '")')
                     div.fen
                         //- div.fen_title #{locals.threadTitle}
                         div.fen_content!=locals.content

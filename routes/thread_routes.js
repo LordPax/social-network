@@ -27,21 +27,24 @@ app.get('/thread/:id', (req, res) => {
         thModel.searchThread(id, data => {
             thModel.searchRep(id, rep => {
                 thModel.searchEpingle(epingle => {
-                    res.render('pages/thread', {
-                        titre : 'Winveer - thread',
-                        str_id : data.str_id,
-                        threadTitle : data.title,
-                        content : data.content,
-                        reponse : rep,
-                        date : data.date,
-                        user : data.user,
-                        username : data.username,
-                        userIdT : data.userId,
-                        userId : req.session.userId,
-                        epingle,
-                        name : req.session.pseudo,
-                        rank : req.session.rank,
-                        err
+                    thModel.isEpingle(id, isEp => {
+                        res.render('pages/thread', {
+                            titre : 'Winveer - thread',
+                            str_id : data.str_id,
+                            threadTitle : data.title,
+                            content : data.content,
+                            isEp,
+                            reponse : rep,
+                            date : data.date,
+                            user : data.user,
+                            username : data.username,
+                            userIdT : data.userId,
+                            userId : req.session.userId,
+                            epingle,
+                            name : req.session.pseudo,
+                            rank : req.session.rank,
+                            err
+                        })
                     })
                 })
             })

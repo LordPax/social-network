@@ -46,7 +46,11 @@ app.use(mainRoutes)
 io.of('/reponse').use((socket, next) => {
     sess(socket.handshake, {}, next)
 })
+io.of('/epingle').use((socket, next) => {
+    sess(socket.handshake, {}, next)
+})
 
 sock.reponse('/reponse')
+sock.epingle('/epingle')
 
 http.listen(port, () => console.log('Ecoute le port', port, '...'))

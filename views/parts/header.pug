@@ -36,7 +36,7 @@ header
         div.popup.newthread_pop
             div.popup_fen
                 div.popup_fen_title Nouveau Thread
-                    div.info_right.newthread_close
+                    div.info_right.close
                         label X
                 div.popup_fen_content
                     form.form.form_th(method='post' action='/newthread')
@@ -45,4 +45,11 @@ header
                         div.form_right
                             input.button.log_btn(type='submit' name='sub' value='Poster')
                     div.err
+
+        div.popup.delete_pop
+            div.popup_fen
+                div.popup_fen_title Supprimer le Thread
+                    div.info_right.close
+                        label X
+                div.popup_fen_content test
                         

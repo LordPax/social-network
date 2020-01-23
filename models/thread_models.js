@@ -42,6 +42,21 @@ const repThread = (id, content, user) => {
     }, (err, res, fields) => { if (err) throw err })
 }
 
+const addEpingle = id => {
+    isEpingle(id, isEp => {
+        if (isEp === 0) {
+            db.query('INSERT INTO epingle SET ?', {
+                id_thread : id
+            }, (err, res, fields) => { if (err) throw err })
+        }
+    })
+}
+
+const removeEpingle = id => {
+    db.query('DELETE FROM epingle WHERE id_thread = ?', [id],
+    (err, res, fields) => { if (err) throw err })
+}
+
 const searchThread = (id, res, err) => {
     search('SELECT * FROM thread WHERE str_id = ?', [id])
     .then(data => {
@@ -63,6 +78,14 @@ const searchThread = (id, res, err) => {
     .catch(err2 => err(err2))
 }
 
+const isEpingle = (id, res) => {
+    search('SELECT COUNT(*) as nb FROM epingle WHERE id_thread = ?', [id])
+    .then(data => {
+        const [{nb}] = data
+        res(nb === 1 ? 1 : 0)
+    })
+}
+
 const searchRep = (id, res) => {
     search('SELECT * FROM reponse WHERE id_post = ? ORDER BY id', [id])
     .then(data => {
@@ -75,7 +98,9 @@ const threadAcc = (limit, res) => {
     search('SELECT * FROM thread ORDER BY id DESC LIMIT ?', [limit])
     // search('SELECT * FROM thread ORDER BY id DESC', [limit])
     .then(data => {
-        wait.launchFiber(searchUserInfoThreadSync, data, res)
+        wait.launchFiber(searchUserInfoThreadSync, data, dataEp => {
+            wait.launchFiber(isEpingleSync, dataEp, res)
+        })
     })
     .catch(err => {throw err})
 }
@@ -84,7 +109,7 @@ const searchEpingle = callRes => {
     db.query('SELECT * FROM epingle', (err, res, fields) => {
         if (err) throw err
 
-        wait.launchFiber(searchThreadInfoEpingleSync, res, (dataTh) => {
+        wait.launchFiber(searchThreadInfoEpingleSync, res, dataTh => {
             wait.launchFiber(searchUserInfoThreadSync, dataTh, callRes)
         })
     })
@@ -125,6 +150,24 @@ const searchUserInfoThreadSync = (data, res) => {
     res(thread)
 }
 
+const isEpingleSync = (data, res) => {
+    const th = data.map(elem => {
+        const [{nb}] = wait.forMethod(db, 'query', 'SELECT COUNT(*) as nb FROM epingle WHERE id_thread = ?', [elem.str_id])
+        return {
+            str_id : elem.str_id,
+            title : elem.title,
+            content : elem.content,
+            user : elem.user,
+            username : elem.username,
+            userId : elem.userId,
+            date : elem.date,
+            isEpingle : nb === 1 ? 1 : 0
+        }
+    })
+
+    res(th)
+}
+
 const searchThreadInfoEpingleSync = (data, res) => {
     const epingle = data.map(elem => {
         const [info] = wait.forMethod(db, 'query', 'SELECT * FROM thread WHERE str_id = ?', [elem.id_thread])
@@ -140,6 +183,8 @@ const searchThreadInfoEpingleSync = (data, res) => {
     res(epingle)
 }
 
+
+
 module.exports = {
     search,
     addThread,
@@ -149,5 +194,8 @@ module.exports = {
     threadAcc,
     repThread,
     searchRep,
-    searchEpingle
+    searchEpingle,
+    addEpingle,
+    removeEpingle,
+    isEpingle
 }
