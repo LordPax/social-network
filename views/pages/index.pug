@@ -29,7 +29,7 @@ html(lang='fr')
                                     - if (locals.userId != 0 && t.userId == locals.userId)
                                         img.more_btn.edit(src='/assets/images/edit.png')
                                     - if (locals.userId != 0 && (t.userId == locals.userId || locals.rank == 1))
-                                        img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupTread("' + t.str_id + '")')
+                                        img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupThread("' + t.str_id + '", "' + locals.userId + '", "' + t.userId + '", "' + locals.rank + '")')
                             div.fen_content.fen_hide!=t.content
                             div.fen_show
                                 label.link(onclick='showMore("'+ t.str_id +'")') Afficher plus

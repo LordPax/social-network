@@ -2,6 +2,7 @@ const init = io => {
     const thModel = require('../models/thread_models')
     const logModel = require('../models/login_models')
     const until = require('../include/until')
+    const {escapeHtml} = require('../include/lib-perso')
 
     const reponse = namespace => {
         io.of(namespace).on('connection', socket => {
@@ -32,16 +33,40 @@ const init = io => {
             socket.on('epingle', data => {
                 const {id, mode} = data
                 const {userId, rank} = socket.handshake.session
-                const modeInt = parseInt(mode)
+                const modeInt = parseInt(escapeHtml(mode))
+                const idEsc = escapeHtml(id)
 
-                if (userId && rank === 1) {
-                    if (id != '' && mode != '') {
-                        if (id.length === 10 && (modeInt === 0 || modeInt === 1)) {
+                if (userId && (rank === 1 || rank === 2)) {
+                    if (idEsc != '' && mode != '') {
+                        if (idEsc.length === 10 && (modeInt === 0 || modeInt === 1)) {
                             if (modeInt === 1)
-                                thModel.addEpingle(id)
+                                thModel.addEpingle(idEsc)
                             else
-                                thModel.removeEpingle(id)
+                                thModel.removeEpingle(idEsc)
                         }
+                    }
+                }
+            })
+        })
+    }
+
+    const remove = namespace => {
+        io.of(namespace).on('connection', socket => {
+            socket.on('remove', data => {
+                const {id, reason} = data
+                const {userId, rank} = socket.handshake.session
+                const idEsc = escapeHtml(id)
+                const reasonEsc = escapeHtml(reason)
+                
+
+                if (userId !== 0) {
+                    if (idEsc != '') {
+                        thModel.searchThread(idEsc, dataTh => {
+                            if ((dataTh.user === userId || (rank === 1 || rank === 2)) && userId !== 0){
+                                const r = dataTh.user !== userId ? reasonEsc : ''
+                                console.log(data)
+                            }
+                        })
                     }
                 }
             })
@@ -50,7 +75,8 @@ const init = io => {
 
     return {
         reponse,
-        epingle
+        epingle,
+        remove
     }
 }
 

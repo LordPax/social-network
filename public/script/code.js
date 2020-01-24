@@ -32,6 +32,7 @@
 
 const rep = io.connect('/reponse')
 const ep = io.connect('/epingle')
+const rem = io.connect('/remove')
 
 const showMore = id => {
     const btn = $('.t_' + id + ' .fen_show .link')
@@ -55,10 +56,21 @@ const showMoreOk = id => {
     const taille = showContent.height()
     if (taille < 500)
         btn.hide()
-    // alert('salur ' + id)
 }
 
-const removePopupTread = id => $('.delete_pop').show()
+const removePopupThread = (idTh, idUser, idUserTh, rankUser) => {
+    $('.delete_pop').show()
+    const deleteBtn = $('.delete_pop .popup_fen .popup_fen_content .info_head .delete')
+    const reason = $('.delete_pop .popup_fen .popup_fen_content .input_area_rep')
+    if (idUserTh === idUser || rankUser === 0 || idUser === 0)
+        reason.hide()
+    deleteBtn.attr('onclick', 'removeThread("' + idTh + '")')
+}
+
+const removeThread = id => {
+    const reason = $('.delete_pop .popup_fen .popup_fen_content .input_area_rep')
+    rem.emit('remove', {id, reason : reason ? reason.val() : ''})
+}
 
 const epingleOkThread = id => {
     const epingle = $('.t_' + id + ' .fen_title .info_right .ep')
@@ -86,6 +98,22 @@ const epingleNoThread = id => {
 //     }
 // })
 
+rem.on('retourRem', data => {
+
+})
+
+rep.on('retour', data => {
+    $('.rep').append(`
+        <div class = "fen_rep">
+            <div class = "fen_name">
+                <a class = "link" href = "/profil/${data.username}">${data.user}</a>
+                <div class = "info_right">${data.date}</div>
+            </div>
+            <div class = "fen_rep_content">${data.content}</div>
+        </div>
+    `)
+})
+
 $(() => {
     $('.delete_pop').hide()
 
@@ -100,17 +128,7 @@ $(() => {
         return false
     })
 
-    rep.on('retour', data => {
-        $('.rep').append(`
-            <div class = "fen_rep">
-                <div class = "fen_name">
-                    <a class = "link" href = "/profil/${data.username}">${data.user}</a>
-                    <div class = "info_right">${data.date}</div>
-                </div>
-                <div class = "fen_rep_content">${data.content}</div>
-            </div>
-        `)
-    })
+    
 
     $('.user_option').hide()
     $('.user_menu').mouseover(() => {
@@ -166,8 +184,8 @@ $(() => {
             `)
             return false
         }
-
     })
+
 
 
 })

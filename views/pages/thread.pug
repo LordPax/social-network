@@ -27,7 +27,7 @@ html(lang='fr')
                                 - if (locals.userId != 0 && locals.userIdT == locals.userId)
                                     img.more_btn.edit(src='/assets/images/edit.png')
                                 - if (locals.userId != 0 && (locals.userIdT == locals.userId || locals.rank == 1))
-                                    img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupTread("' + locals.str_id + '")')
+                                    img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupThread("' + locals.str_id + '", "' + locals.userId + '", "' + locals.userIdT + '", "' + locals.rank + '")')
                     div.fen
                         //- div.fen_title #{locals.threadTitle}
                         div.fen_content!=locals.content

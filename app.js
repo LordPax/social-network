@@ -49,8 +49,12 @@ io.of('/reponse').use((socket, next) => {
 io.of('/epingle').use((socket, next) => {
     sess(socket.handshake, {}, next)
 })
+io.of('/remove').use((socket, next) => {
+    sess(socket.handshake, {}, next)
+})
 
 sock.reponse('/reponse')
 sock.epingle('/epingle')
+sock.remove('/remove')
 
 http.listen(port, () => console.log('Ecoute le port', port, '...'))

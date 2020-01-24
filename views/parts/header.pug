@@ -51,5 +51,9 @@ header
                 div.popup_fen_title Supprimer le Thread
                     div.info_right.close
                         label X
-                div.popup_fen_content test
-                        
+                div.popup_fen_content Etes-vous sûr de vouloir supprimer ce thread
+                    - if (locals.rank != 0)
+                        textarea.input_area.input_area_rep(placeholder='raison de la suppression (optionnel)')
+                    div.info_head
+                        button.button.log_btn2.delete Supprimer
+                        button.buttonOther.log_btn2.head_btn.close Annuler
