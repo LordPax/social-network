@@ -17,24 +17,30 @@ html(lang='fr')
                                     div.epingle_temps #{ep.date}
                 div.main
                     each t in locals.thread
-                        div.fen(class='t_' + t.str_id onclick='showMoreOk("' + t.str_id + '")')
+                        //- div.fen(class='t_' + t.str_id onclick='showMoreOk("' + t.str_id + '")')
+                        div.fen(class='t_' + t.str_id )
                             div.fen_title 
                                 a.link(href='/thread/' + t.str_id) #{t.title}
                                 div.info_right
-                                    - if (locals.userId != 0 && locals.rank == 1)
+                                    - if (locals.userId != 0 && (locals.rank == 1 || locals.rank == 2))
                                         - if (t.isEpingle == 0)
                                             img.more_btn.ep(src='/assets/images/epingle_no.png' onclick='epingleOkThread("' + t.str_id + '")')
                                         - else
                                             img.more_btn.ep(src='/assets/images/epingle_ok.png' onclick='epingleNoThread("' + t.str_id + '")')
                                     - if (locals.userId != 0 && t.userId == locals.userId)
                                         img.more_btn.edit(src='/assets/images/edit.png')
-                                    - if (locals.userId != 0 && (t.userId == locals.userId || locals.rank == 1))
+                                    - if (locals.userId != 0 && (t.userId == locals.userId || (locals.rank == 1 || locals.rank == 2)))
                                         img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupThread("' + t.str_id + '", "' + locals.userId + '", "' + t.userId + '", "' + locals.rank + '")')
+                                    - if (!locals.userId || (t.userId != locals.userId && locals.rank == 0))
+                                        img.more_btn.report(src='/assets/images/report.png' onclick='reportPopupThread("' + t.str_id + '")')
                             div.fen_content.fen_hide!=t.content
                             div.fen_show
                                 label.link(onclick='showMore("'+ t.str_id +'")') Afficher plus
                             div.fen_info
                                 a.link(href='/profil/' + t.username) #{t.user}
                                 div.info_right #{t.date}
+                            script(type='text/javascript')!='showMoreOk("' + t.str_id + '")'
+
+                    button.button.more_thread Afficher plus de thread
 
         include ../parts/footer.pug

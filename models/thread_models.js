@@ -78,6 +78,16 @@ const searchThread = (id, res, err) => {
     .catch(err2 => err(err2))
 }
 
+const updateThread = (id, data) => {
+    const {title, content} = data
+    db.query('UPDATE thread SET title = ?, content = ? WHERE str_id = ?', [
+        title, 
+        content, 
+        id
+    ],
+    (err, res, fields) => { if (err) throw err })
+}
+
 const isEpingle = (id, res) => {
     search('SELECT COUNT(*) as nb FROM epingle WHERE id_thread = ?', [id])
     .then(data => {
@@ -197,5 +207,6 @@ module.exports = {
     searchEpingle,
     addEpingle,
     removeEpingle,
-    isEpingle
+    isEpingle,
+    updateThread
 }

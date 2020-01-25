@@ -3,6 +3,8 @@ const init = io => {
     const logModel = require('../models/login_models')
     const until = require('../include/until')
     const {escapeHtml} = require('../include/lib-perso')
+    const showdown = require('showdown')
+    const convert = new showdown.Converter()
 
     const reponse = namespace => {
         io.of(namespace).on('connection', socket => {
@@ -55,16 +57,29 @@ const init = io => {
             socket.on('remove', data => {
                 const {id, reason} = data
                 const {userId, rank} = socket.handshake.session
-                const idEsc = escapeHtml(id)
-                const reasonEsc = escapeHtml(reason)
                 
-
                 if (userId !== 0) {
-                    if (idEsc != '') {
+                    if (id != '' && id.length === 10) {
+                        const idEsc = escapeHtml(id)
+                        const reasonEsc = escapeHtml(reason ? reason : '')
+
                         thModel.searchThread(idEsc, dataTh => {
-                            if ((dataTh.user === userId || (rank === 1 || rank === 2)) && userId !== 0){
-                                const r = dataTh.user !== userId ? reasonEsc : ''
-                                console.log(data)
+                            if (dataTh.userId === userId || (rank === 1 || rank === 2)){
+                                const r = dataTh.userId !== userId ? reasonEsc : 'aucune'
+                                const by = dataTh.userId === userId ? 'le propriétaire' : 'un modérateur'
+                                const title = '[Supprimer par ' + by + ']'
+                                const content = '# Raison de la suppression\n ' + r
+
+                                thModel.updateThread(idEsc, {
+                                    title,
+                                    content
+                                })
+
+                                socket.emit('retourRem', {
+                                    title,
+                                    content : convert.makeHtml(content),
+                                    idEsc
+                                })
                             }
                         })
                     }
@@ -73,10 +88,19 @@ const init = io => {
         })
     }
 
+    const report = namespace => {
+        io.of(namespace).on('connection', socket => {
+            socket.on('report', data => {
+                console.log(data)
+            })
+        })
+    }
+
     return {
         reponse,
         epingle,
-        remove
+        remove,
+        report
     }
 }
 

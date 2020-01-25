@@ -33,6 +33,7 @@
 const rep = io.connect('/reponse')
 const ep = io.connect('/epingle')
 const rem = io.connect('/remove')
+const rp = io.connect('/report')
 
 const showMore = id => {
     const btn = $('.t_' + id + ' .fen_show .link')
@@ -64,6 +65,8 @@ const removePopupThread = (idTh, idUser, idUserTh, rankUser) => {
     const reason = $('.delete_pop .popup_fen .popup_fen_content .input_area_rep')
     if (idUserTh === idUser || rankUser === 0 || idUser === 0)
         reason.hide()
+    else
+        reason.show()
     deleteBtn.attr('onclick', 'removeThread("' + idTh + '")')
 }
 
@@ -86,6 +89,24 @@ const epingleNoThread = id => {
     ep.emit('epingle', {id, mode : '0'})
 }
 
+const reportPopupThread = id => {
+    $('.report_pop').show()
+    const reportBtn = $('.report_pop .popup_fen .popup_fen_content .info_head .report')
+    const reason = $('.report_pop .popup_fen .popup_fen_content .input_area_rep')
+    
+    reportBtn.attr('onclick', 'reportThread("' + id + '")')
+}
+
+const reportThread = id => {
+    const reason = $('.report_pop .popup_fen .popup_fen_content .input_area_rep')
+    const reasonVal = reason.val()
+
+    reason.val('')
+    $('.report_pop').hide()
+
+    rp.emit('report', {id, reasonVal})
+}
+
 // ep.on('retourEp', data => {
 //     const epingle = $('.t_' + data.id + ' .fen_title .info_right .ep')
 //     if (data.mode == 1){
@@ -99,7 +120,17 @@ const epingleNoThread = id => {
 // })
 
 rem.on('retourRem', data => {
+    const {idEsc, title, content} = data
+    const contentTh = $('.t_' + idEsc + ' .fen_content')
+    const title1 = $('.t_' + idEsc + ' .fen_title .link')
+    const title2 = $('.t_' + idEsc + ' .fen_title')
+    const titleTh = title1.text() ? title1 : title2
 
+    $('.delete_pop .popup_fen .popup_fen_content .input_area_rep').val('')
+    $('.delete_pop').hide()
+
+    titleTh.text(title)
+    contentTh.html(content)
 })
 
 rep.on('retour', data => {
@@ -115,12 +146,12 @@ rep.on('retour', data => {
 })
 
 $(() => {
-    $('.delete_pop').hide()
+    $('.popup').hide()
 
     $('#form_rep').submit(e => {
-        const id = $('.id_thread').val()
-        const input_content = $('.input_area_rep').val()
-        $('.input_area_rep').val('')
+        const id = $('#form_rep .id_thread').val()
+        const input_content = $('#form_rep .input_area_rep').val()
+        $('#form_rep .input_area_rep').val('')
 
         e.preventDefault()
         rep.emit('rep', {id, input_content})
@@ -164,7 +195,7 @@ $(() => {
         btn2.hide()
     })
 
-    $('.newthread_pop').hide()
+    // $('.newthread_pop').hide()
     $('.newthread_btn').click(() => {
         $('.newthread_pop').show()
     })
