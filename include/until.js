@@ -91,11 +91,11 @@ const changeVerif = (data, callRes, callErr) => {
 }
 
 const showRank = rank => 
-match(rank)
-.case(1, () => 'Admin')
-.case(2, () => 'Modo')
-.case(3, () => 'Contributeur')
-.default(() => 0)
+    match(rank)
+        .case(1, () => 'Admin')
+        .case(2, () => 'Modo')
+        .case(3, () => 'Contributeur')
+        .default(() => 0)
 
 module.exports = {
     reformuleDate,
