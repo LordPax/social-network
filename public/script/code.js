@@ -34,6 +34,7 @@ const rep = io.connect('/reponse')
 const ep = io.connect('/epingle')
 const rem = io.connect('/remove')
 const rp = io.connect('/report')
+const sh = io.connect('/searchUser')
 
 const showMore = id => {
     const btn = $('.t_' + id + ' .fen_show .link')
@@ -107,6 +108,13 @@ const reportThread = id => {
     rp.emit('report', {id, reasonVal})
 }
 
+const affichePanel = selector => {
+    $('.panel_info').hide()
+    $('.panel_selector').removeClass('panel_selector_use')
+    $('.panel_' + selector).show()
+    $('.selector_' + selector).addClass('panel_selector_use')
+}
+
 // ep.on('retourEp', data => {
 //     const epingle = $('.t_' + data.id + ' .fen_title .info_right .ep')
 //     if (data.mode == 1){
@@ -146,6 +154,9 @@ rep.on('retour', data => {
 })
 
 $(() => {
+    $('.panel_info').hide()
+    $('.panel_stat').show()
+    $('.selector_stat').addClass('panel_selector_use')
     $('.popup').hide()
 
     $('#form_rep').submit(e => {
@@ -215,6 +226,15 @@ $(() => {
             `)
             return false
         }
+    })
+
+    $('.input_search').keyup(e => {
+        const txt = $('.input_search').val()
+
+        e.preventDefault()
+        sh.emit('searchUser', txt)
+        
+        return false
     })
 
 

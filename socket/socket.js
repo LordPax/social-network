@@ -96,11 +96,20 @@ const init = io => {
         })
     }
 
+    const searchUser = namespace => {
+        io.of(namespace).on('connection', socket => {
+            socket.on('searchUser', data => {
+                console.log(data)
+            })
+        })
+    }
+
     return {
         reponse,
         epingle,
         remove,
-        report
+        report,
+        searchUser
     }
 }
 

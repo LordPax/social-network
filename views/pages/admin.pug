@@ -4,15 +4,34 @@ html(lang='fr')
         include ../parts/header.pug
         div.panel
             div.panel_title Panel Admin
-            div.panel_selector Satistique
-            div.panel_selector Utilisateur
-            div.panel_selector Equipe
-            div.panel_selector Report
+            div.panel_selector.selector_stat(onclick='affichePanel("stat")')
+                label Satistique
+            div.panel_selector.selector_user(onclick='affichePanel("user")')
+                label Utilisateur
+            div.panel_selector.selector_team(onclick='affichePanel("team")')
+                label Equipe
+            div.panel_selector.selector_report(onclick='affichePanel("report")')
+                label Report
         section
             div.main_admin
-                div.fen
-                    div.fen_title panel admin
-                    div.fen_content coming soon
+                div.panel_info.panel_stat
+                    div.fen
+                        div.fen_title Statistique
+                        div.fen_content coming soon
+                div.panel_info.panel_user
+                    div.fen
+                        div.fen_title Utilisateur
+                        div.fen_content
+                            div.search
+                                input.input_text.input_search(type='text' name='input_user' placeholder='Chercher un utilisateur')
+                div.panel_info.panel_team
+                    div.fen
+                        div.fen_title Equipe
+                        div.fen_content coming soon
+                div.panel_info.panel_report
+                    div.fen
+                        div.fen_title Report
+                        div.fen_content coming soon
                     
 
         include ../parts/footer.pug

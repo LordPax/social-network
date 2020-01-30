@@ -60,5 +60,6 @@ sock.reponse('/reponse')
 sock.epingle('/epingle')
 sock.remove('/remove')
 sock.report('/report')
+sock.searchUser('/searchUser')
 
 http.listen(port, () => console.log('Ecoute le port', port, '...'))
