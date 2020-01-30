@@ -187,10 +187,11 @@ p{
     font-size : 22px;
     /*width : 70%;*/
     display : inline;
-    border-top-left-radius : 6px;
+    border-radius : 5px;
+    /*border-top-left-radius : 6px;
     border-bottom-left-radius : 6px;
     border-top-right-radius : 0;
-    border-bottom-right-radius : 0;
+    border-bottom-right-radius : 0;*/
 }
 .input_area_rep{
     height : 75px;
