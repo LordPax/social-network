@@ -96,10 +96,26 @@ const init = io => {
         })
     }
 
+    const moreThread = namespace => {
+        io.of(namespace).on('connection', socket => {
+            socket.on('moreThread', data => {
+                console.log(data)
+            })
+        })
+    }
+
     const searchUser = namespace => {
         io.of(namespace).on('connection', socket => {
             socket.on('searchUser', data => {
-                console.log(data)
+                logModel.searchAllUser(data, user => {
+                    socket.emit('retourUser', user.map(elem => {
+                        return {
+                            username : elem.username,
+                            rank : until.showRank(elem.rank),
+                            email : elem.email
+                        }
+                    }))
+                })
             })
         })
     }
@@ -109,7 +125,8 @@ const init = io => {
         epingle,
         remove,
         report,
-        searchUser
+        searchUser,
+        moreThread
     }
 }
 

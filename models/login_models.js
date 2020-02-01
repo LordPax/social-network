@@ -1,7 +1,7 @@
 const db = require('./mysql')
 const {match} = require('../include/lib-perso')
 
-const addUser = (info) => {
+const addUser = info => {
     db.query('INSERT INTO user SET ?', {
         username : info.username,
         password : info.password,
@@ -37,6 +37,15 @@ const searchUserInfoByName = (name, callRes, callErr) => {
             callRes(res[0])
         else
             callErr('Utilisateur introuvable')
+    })
+}
+
+const searchAllUser = (name, callRes) => {
+    const like = name != '' ? '%' + name + '%' : ' '
+    db.query('SELECT * FROM user WHERE username LIKE ?', [like],
+    (err, res, fields) => {
+        if (err) throw err
+        callRes(res)
     })
 }
 
@@ -80,5 +89,6 @@ module.exports = {
     searchUserInfo,
     nameId,
     // nameId2,
-    searchUserInfoByName
+    searchUserInfoByName,
+    searchAllUser
 }

@@ -404,6 +404,21 @@ a, .link:hover{
     background-color : #2c3e50;
     transition-duration : 0.2s;
 }
+.resuser{
+    border-bottom : 1px solid #2c3e50;
+    display : flex;
+}
+.resuser_info{
+    padding-top : 10px;
+    padding-bottom : 10px;
+    font-size : 22px;
+    /*font-weight : 400;*/
+    width : 30%;
+}
+.resuser_action{
+    text-align : right;
+    width : 10%;
+}
 
 @media(max-width : 1250px){
     .large{

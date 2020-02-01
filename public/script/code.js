@@ -153,6 +153,20 @@ rep.on('retour', data => {
     `)
 })
 
+sh.on('retourUser', data => {
+    $('.resResearch').html('')
+    data.forEach(elem => {
+        $('.resResearch').append(`
+            <div class = "resuser">
+                <div class = "resuser_info"><a class = "link" target = "_Blanck" href = "/profil/${elem.username}">${elem.username}</a></div>
+                <div class = "resuser_info">${elem.email}</div>
+                <div class = "resuser_info">${elem.rank}</div>
+                <div class = "resuser_info resuser_action">action</div>
+            </div>
+        `)
+    })
+})
+
 $(() => {
     $('.panel_info').hide()
     $('.panel_stat').show()

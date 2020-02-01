@@ -55,11 +55,15 @@ io.of('/remove').use((socket, next) => {
 io.of('/report').use((socket, next) => {
     sess(socket.handshake, {}, next)
 })
+io.of('/searchUser').use((socket, next) => {
+    sess(socket.handshake, {}, next)
+})
 
 sock.reponse('/reponse')
 sock.epingle('/epingle')
 sock.remove('/remove')
 sock.report('/report')
 sock.searchUser('/searchUser')
+sock.moreThread('/moreThread')
 
 http.listen(port, () => console.log('Ecoute le port', port, '...'))
