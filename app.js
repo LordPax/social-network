@@ -58,6 +58,10 @@ io.of('/report').use((socket, next) => {
 io.of('/searchUser').use((socket, next) => {
     sess(socket.handshake, {}, next)
 })
+io.of('/moreThread').use((socket, next) => {
+    sess(socket.handshake, {}, next)
+})
+
 
 sock.reponse('/reponse')
 sock.epingle('/epingle')

@@ -19,14 +19,14 @@ html(lang='fr')
                     div.fen(class = 't_' + locals.str_id)
                         div.fen_title #{locals.threadTitle}
                             div.info_right
-                                - if (locals.userId != 0 && locals.rank == 1)
+                                - if (locals.userId != 0 && (locals.rank == 1 || locals.rank == 2))
                                     - if (locals.isEp == 0)
                                         img.more_btn.ep(src='/assets/images/epingle_no.png' onclick='epingleOkThread("' + locals.str_id + '")')
                                     - else
                                         img.more_btn.ep(src='/assets/images/epingle_ok.png' onclick='epingleNoThread("' + locals.str_id + '")')
                                 - if (locals.userId != 0 && locals.userIdT == locals.userId)
                                     img.more_btn.edit(src='/assets/images/edit.png')
-                                - if (locals.userId != 0 && (locals.userIdT == locals.userId || locals.rank == 1))
+                                - if (locals.userId != 0 && (locals.userIdT == locals.userId || (locals.rank == 1 || locals.rank == 2)))
                                     img.more_btn.remove(src='/assets/images/delete.png' onclick='removePopupThread("' + locals.str_id + '", "' + locals.userId + '", "' + locals.userIdT + '", "' + locals.rank + '")')
                                 - if (!locals.userId || (locals.userIdT != locals.userId && locals.rank == 0))
                                         img.more_btn.report(src='/assets/images/report.png' onclick='reportPopupThread("' + locals.str_id + '")')

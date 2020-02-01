@@ -35,6 +35,7 @@ const ep = io.connect('/epingle')
 const rem = io.connect('/remove')
 const rp = io.connect('/report')
 const sh = io.connect('/searchUser')
+const mt = io.connect('/moreThread')
 
 const showMore = id => {
     const btn = $('.t_' + id + ' .fen_show .link')
@@ -105,7 +106,7 @@ const reportThread = id => {
     reason.val('')
     $('.report_pop').hide()
 
-    rp.emit('report', {id, reasonVal})
+    rp.emit('report', {id, reason : reasonVal})
 }
 
 const affichePanel = selector => {
@@ -113,6 +114,11 @@ const affichePanel = selector => {
     $('.panel_selector').removeClass('panel_selector_use')
     $('.panel_' + selector).show()
     $('.selector_' + selector).addClass('panel_selector_use')
+}
+
+const moreThread = nb => {
+    mt.emit('moreThread')
+    // $('.more_thread').attr('onclick', 'moreThread(' + (nb + 10) + ')')
 }
 
 // ep.on('retourEp', data => {
@@ -164,6 +170,12 @@ sh.on('retourUser', data => {
                 <div class = "resuser_info resuser_action">action</div>
             </div>
         `)
+    })
+})
+
+mt.on('retourMt', data => {
+    data.forEach(elem => {
+        $('.thAcc').append(elem)
     })
 })
 

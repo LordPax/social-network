@@ -69,19 +69,4 @@ app.post('/newthread', (req, res) => {
     }
 })
 
-// app.post('/thread/:id', (req, res) => {
-//     const content = req.body.input_content, str_id = req.params.id
-//     if (req.body.input_content != '' && req.params.id != '') {
-//         const {userId} = req.session
-//         const {pseudo} = req.session
-//         const id = userId ? userId : 0
-//         thModel.repThread(str_id, content, id)
-//         res.redirect('/thread/' + str_id)
-//     }
-//     else {
-//         req.session.err = 'Les champs de textes ne doivent pas être vide'
-//         res.redirect('/thread/' + str_id)
-//     }
-// })
-
 module.exports = app

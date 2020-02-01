@@ -14,13 +14,21 @@ const search = (q, data) => {
     })
 }
 
-const strRandVerif = (taille) => {
+const strRandVerif = taille => {
     const str = str_rand(taille)
     db.query('SELECT * FROM thread WHERE str_id = ?', [str] , (err, res, fields) => {
         if (err) throw err
-        return res.length !== 0 ? urlGen(taille) : true
+        return res.length !== 0 ? strRandVerif(taille) : true
     })
     return str
+}
+
+const addReport = (thread_id, user_id, reason) => {
+    db.query('INSERT INTO report SET ?', {
+       reason : escapeHtml(reason),
+       user_id : user_id,
+       thread_id : escapeHtml(thread_id)
+    }, (err, res, fields) => { if (err) throw err })
 }
 
 const addThread = (title, content, user) => {
@@ -104,8 +112,8 @@ const searchRep = (id, res) => {
     .catch(err => {throw err})
 }
 
-const threadAcc = (limit, res) => {
-    search('SELECT * FROM thread ORDER BY id DESC LIMIT ?', [limit])
+const threadAcc = (limit, res, offset = 0) => {
+    search('SELECT * FROM thread ORDER BY id DESC LIMIT ?, ?', [offset, limit])
     // search('SELECT * FROM thread ORDER BY id DESC', [limit])
     .then(data => {
         wait.launchFiber(searchUserInfoThreadSync, data, dataEp => {
@@ -208,5 +216,6 @@ module.exports = {
     addEpingle,
     removeEpingle,
     isEpingle,
-    updateThread
+    updateThread,
+    addReport
 }
