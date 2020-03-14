@@ -10,7 +10,7 @@ app.get('/profil/:username', (req, res) => {
     req.session.err = ''
     logModel.searchUserInfoByName(username, data => {
         res.render('pages/profil', {
-            titre : 'Winveer - ' + username,
+            titre : 'social-network - ' + username,
             userId : req.session.userId,
             name : req.session.pseudo,
             rank : req.session.rank,
@@ -24,7 +24,7 @@ app.get('/profil/:username', (req, res) => {
         })
     }, err => {
         res.render('pages/profil', {
-            titre : 'Winveer - introuvable',
+            titre : 'social-network - introuvable',
             userId : req.session.userId,
             name : req.session.pseudo,
             rank : req.session.rank,
@@ -35,7 +35,7 @@ app.get('/profil/:username', (req, res) => {
 
 app.get('/admin', mw.admin, (req, res) => {
     res.render('pages/admin', {
-        titre : 'Winveer - Panel admin',
+        titre : 'social-network - Panel admin',
         userId : req.session.userId,
         name : req.session.pseudo,
         rank : req.session.rank,

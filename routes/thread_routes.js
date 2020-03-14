@@ -10,7 +10,7 @@ app.get('/newthread', (req, res) => {
     const {err} = req.session
     req.session.err = ''
     res.render('pages/newthread', {
-        titre: 'Winveer - nouveau thread',
+        titre: 'social-network - nouveau thread',
         userId : req.session.userId,
         name : req.session.pseudo,
         rank : req.session.rank,
@@ -29,7 +29,7 @@ app.get('/thread/:id', (req, res) => {
                 thModel.searchEpingle(epingle => {
                     thModel.isEpingle(id, isEp => {
                         res.render('pages/thread', {
-                            titre : 'Winveer - thread',
+                            titre : 'social-network - thread',
                             str_id : data.str_id,
                             threadTitle : data.title,
                             content : data.content,

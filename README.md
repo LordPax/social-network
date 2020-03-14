@@ -4,17 +4,17 @@ plus tard
 
 <!-- ## Images
 ### Acceuil
-![accueil](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/accueil.png)
+![accueil](https://raw.githubusercontent.com/LordPax/social-network/master/exemple/accueil.png)
 
 ### Nouveau thread
-![newthread](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/newthread.png)
+![newthread](https://raw.githubusercontent.com/LordPax/social-network/master/exemple/newthread.png)
 
 ### Les threads
-![lorem](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/thread_lorem.png)
-![readme](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/thread_readme.png)
+![lorem](https://raw.githubusercontent.com/LordPax/social-network/master/exemple/thread_lorem.png)
+![readme](https://raw.githubusercontent.com/LordPax/social-network/master/exemple/thread_readme.png)
 
 ### Les réponses
-![reponse](https://raw.githubusercontent.com/LordPax/winveer/master/exemple/reponse.png) -->
+![reponse](https://raw.githubusercontent.com/LordPax/social-network/master/exemple/reponse.png) -->
 
 ## Installation
 ### Prérequis
@@ -24,7 +24,7 @@ plus tard
 
 ### Intallation
 ```bash
-git clone https://github.com/LordPax/winveer.git; cd winveer
+git clone https://github.com/LordPax/social-network.git; cd social-network
 npm install
 ```
 
@@ -36,7 +36,7 @@ Ce fichier servira pour toutes les informations lier à la base de donnée par e
     "mysql_host" : "host vers mysql",
     "mysql_user" : "nom d'utilisateur pour mysql",
     "mysql_pw" : "mot de passe pour mysql",
-    "mysql_db" : "winveer",
+    "mysql_db" : "social_network",
     "sess_secret" : "quelque chose de secret",
     "sess_name" : "session",
     "sess_max_age" : 3600000
@@ -44,7 +44,7 @@ Ce fichier servira pour toutes les informations lier à la base de donnée par e
 ```
 
 ### Creer la base de donnée
-Creer la base de donnee Winveer grâce au fichier sql ce trouvant a `bdd/winveer.sql` 
+Creer la base de donnee social-network grâce au fichier sql ce trouvant a `bdd/social-network.sql` 
 
 ### Lancer
 ```bash

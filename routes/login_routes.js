@@ -10,14 +10,14 @@ app.get('/register', mw.notLog, (req, res) => {
     req.session.err = ''
     req.session.infoLog = ''
 
-    res.render('pages/register', {titre: 'Winveer - inscription', err, infoLog})
+    res.render('pages/register', {titre: 'social-network - inscription', err, infoLog})
 })
 
 app.get('/login', mw.notLog, (req, res) => {
     const {err} = req.session
     req.session.err = ''
 
-    res.render('pages/login', {titre: 'Winveer - connexion', err})
+    res.render('pages/login', {titre: 'social-network - connexion', err})
 })
 
 app.post('/register', mw.notLog, (req, res) => {

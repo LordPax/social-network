@@ -1,5 +1,5 @@
 {
-  "name": "winveer",
+  "name": "social-network",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LordPax/winveer.git"
+    "url": "git+https://github.com/LordPax/social-network.git"
   },
   "keywords": [
-    "winveer"
+    "social-network"
   ],
   "author": "LordPax",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LordPax/winveer/issues"
+    "url": "https://github.com/LordPax/social-network/issues"
   },
-  "homepage": "https://github.com/LordPax/winveer#readme",
+  "homepage": "https://github.com/LordPax/social-network#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-redis": "^4.0.3",

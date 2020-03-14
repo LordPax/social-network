@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
         thModel.searchEpingle(epingle => {
             // console.log(thread)
             res.render('pages/index', {
-                titre : 'Winveer - accueil',
+                titre : 'social-network - accueil',
                 thread,
                 epingle,
                 userId : req.session.userId,
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/404', (req, res) => res.render('pages/notfound', {
-    titre: 'Winveer - 404',
+    titre: 'social-network - 404',
     userId : req.session.userId,
     name : req.session.pseudo,
     rank : req.session.rank
