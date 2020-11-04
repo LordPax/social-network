@@ -87,7 +87,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'noname','none','none',0),(1,'LordPax','c4d4bb8b223063a5de2a7609d084205c5c94339dba9aa1e88f377e7b0f430c7b','capitaine_ted@hotmail.fr',1);
+INSERT INTO `user` VALUES (0,'noname','none','none',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

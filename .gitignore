@@ -1,5 +1,5 @@
 node_modules/
 package-lock.json
 data.json
-bdd/winveer_backup.sql
+bdd/social-network_backup.sql
 tmp
